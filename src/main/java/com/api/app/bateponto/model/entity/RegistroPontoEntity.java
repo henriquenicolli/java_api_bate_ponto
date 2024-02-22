@@ -20,4 +20,10 @@ public class RegistroPontoEntity {
     @Column(name = "data_hora_registro_ponto")
     private LocalDateTime dataHoraRegistroPonto;
 
+    @Column(name = "latitude")
+    private String latitude;
+
+    @Column(name = "longitude")
+    private String longitude;
+
 }

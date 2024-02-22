@@ -17,4 +17,10 @@ public class ControlePontoDTO {
     @JsonProperty(value = "dataHoraRegistroPonto")
     private LocalDateTime dataHoraRegistroPonto;
 
+    @JsonProperty(value = "latitude")
+    private String latitude;
+
+    @JsonProperty(value = "longitude")
+    private String longitude;
+
 }

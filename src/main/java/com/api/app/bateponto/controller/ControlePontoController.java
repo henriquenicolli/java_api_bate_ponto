@@ -23,12 +23,14 @@ public class ControlePontoController {
     private RegistroPontoRepository registroPontoRepository;
 
     @PostMapping(value = "/registrar")
-    public ResponseEntity<String> saveProduct(@RequestBody ControlePontoDTO controlePontoDTO) {
+    public ResponseEntity<String> registrarPonto(@RequestBody ControlePontoDTO controlePontoDTO) {
 
         System.out.println(controlePontoDTO);
 
         final var registroPontoEntity = RegistroPontoEntity.builder()
                 .dataHoraRegistroPonto(controlePontoDTO.getDataHoraRegistroPonto())
+                .latitude(controlePontoDTO.getLatitude())
+                .longitude(controlePontoDTO.getLongitude())
                 .build();
 
         registroPontoRepository.save(registroPontoEntity);
