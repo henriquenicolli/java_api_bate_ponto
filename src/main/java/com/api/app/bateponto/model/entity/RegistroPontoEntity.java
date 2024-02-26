@@ -26,4 +26,8 @@ public class RegistroPontoEntity {
     @Column(name = "longitude")
     private String longitude;
 
+    @Column(name = "tipo_registro")
+    private int tipoRegistro;
+
+
 }

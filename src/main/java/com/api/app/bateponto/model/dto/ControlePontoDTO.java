@@ -1,5 +1,6 @@
 package com.api.app.bateponto.model.dto;
 
+import com.api.app.bateponto.model.enums.TipoRegistro;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,5 +23,8 @@ public class ControlePontoDTO {
 
     @JsonProperty(value = "longitude")
     private String longitude;
+
+    @JsonProperty(value = "tipoRegistro")
+    private TipoRegistro tipoRegistro;
 
 }

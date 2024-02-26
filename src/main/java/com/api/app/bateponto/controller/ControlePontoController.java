@@ -2,6 +2,7 @@ package com.api.app.bateponto.controller;
 
 import com.api.app.bateponto.model.dto.ControlePontoDTO;
 import com.api.app.bateponto.model.entity.RegistroPontoEntity;
+import com.api.app.bateponto.model.enums.TipoRegistro;
 import com.api.app.bateponto.repository.RegistroPontoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,7 @@ public class ControlePontoController {
                 .dataHoraRegistroPonto(controlePontoDTO.getDataHoraRegistroPonto())
                 .latitude(controlePontoDTO.getLatitude())
                 .longitude(controlePontoDTO.getLongitude())
+                .tipoRegistro(controlePontoDTO.getTipoRegistro().getCodigo())
                 .build();
 
         registroPontoRepository.save(registroPontoEntity);
@@ -40,13 +42,14 @@ public class ControlePontoController {
 
 
     @GetMapping(value = "/registros")
-    public ResponseEntity<List<ControlePontoDTO>> findAll() throws Exception {
+    public ResponseEntity<List<ControlePontoDTO>> findAll() {
         List<RegistroPontoEntity> entities = registroPontoRepository.findAll();
         List<ControlePontoDTO> controlePontoDTOS = new ArrayList<>();
 
         entities.forEach( entity -> {
             final var registroPontoDto = ControlePontoDTO.builder()
-                .dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
+                    .dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
+                    .tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistro()))
                 .build();
 
             controlePontoDTOS.add(registroPontoDto);
