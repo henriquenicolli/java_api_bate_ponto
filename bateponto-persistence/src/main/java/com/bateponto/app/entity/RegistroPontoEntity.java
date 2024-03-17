@@ -3,6 +3,7 @@ package com.bateponto.app.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -10,24 +11,29 @@ import java.time.LocalDateTime;
 @Builder
 @Getter
 @Setter
-@Entity(name = "tbl_registro_ponto")
+@Entity(name = "TBL_REGISTRO_PONTO")
 public class RegistroPontoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private long id;
+    @Column(name = "id_registro_ponto")
+    private long idRegistroPonto;
+
+    @ManyToOne
+    @JoinColumn(name = "id_funcionario", referencedColumnName = "id_funcionario")
+    private FuncionarioEntity funcionarioEntity;
 
     @Column(name = "data_hora_registro_ponto")
     private LocalDateTime dataHoraRegistroPonto;
 
     @Column(name = "latitude")
-    private String latitude;
+    private BigDecimal latitude;
 
     @Column(name = "longitude")
-    private String longitude;
+    private BigDecimal longitude;
 
-    @Column(name = "tipo_registro")
-    private int tipoRegistro;
-
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_registro_ponto", referencedColumnName = "id_tipo_registro_ponto")
+    private TipoRegistroPontoEntity tipoRegistroPontoEntity;
 
 }

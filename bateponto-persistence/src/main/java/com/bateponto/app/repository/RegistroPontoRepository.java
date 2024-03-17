@@ -10,16 +10,15 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-
 @Repository
 public interface RegistroPontoRepository extends JpaRepository<RegistroPontoEntity, Long> {
 
     @Query("SELECT entity " +
-            "FROM tbl_registro_ponto entity " +
+            "FROM TBL_REGISTRO_PONTO entity " +
             "WHERE MONTH(entity.dataHoraRegistroPonto) = :mes")
     List<RegistroPontoEntity> findByMes(final int mes);
 
-    @Query("SELECT rp FROM tbl_registro_ponto rp " +
+    @Query("SELECT rp FROM TBL_REGISTRO_PONTO rp " +
             "WHERE rp.dataHoraRegistroPonto >= :dataInicio AND rp.dataHoraRegistroPonto < :dataFim")
     List<RegistroPontoEntity> findByDataDeHojeEOntem(LocalDateTime dataInicio, LocalDateTime dataFim);
 
