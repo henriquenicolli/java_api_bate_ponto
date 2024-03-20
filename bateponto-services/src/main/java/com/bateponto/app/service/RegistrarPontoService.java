@@ -1,8 +1,11 @@
 package com.bateponto.app.service;
 
+import com.bateponto.app.entity.FuncionarioEntity;
 import com.bateponto.app.entity.RegistroPontoEntity;
+import com.bateponto.app.entity.TipoRegistroPontoEntity;
 import com.bateponto.app.model.dto.RegistroPontoAtualSnapshotDTO;
 import com.bateponto.app.model.dto.RegistroPontoDTO;
+import com.bateponto.app.model.enums.TipoRegistro;
 import com.bateponto.app.repository.RegistroPontoRepository;
 import com.bateponto.app.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +26,16 @@ public class RegistrarPontoService {
 
     public boolean registrarPonto(final RegistroPontoDTO registroPontoDTO) {
         final var registroPontoEntity = RegistroPontoEntity.builder()
+                //mock funcionario
+                .funcionarioEntity(FuncionarioEntity.builder()
+                        .idFuncionario(1)
+                        .build())
                 .dataHoraRegistroPonto(registroPontoDTO.getDataHoraRegistroPonto())
                 .latitude(new BigDecimal(registroPontoDTO.getLatitude()))
                 .longitude(new BigDecimal(registroPontoDTO.getLongitude()))
-                //.tipoRegistro(registroPontoDTO.getTipoRegistro().getCodigo())
+                .tipoRegistroPontoEntity(TipoRegistroPontoEntity.builder()
+                        .idTipoRegistroPonto(registroPontoDTO.getTipoRegistro().getCodigo())
+                        .build())
                 .build();
 
         registroPontoRepository.save(registroPontoEntity);
@@ -42,7 +51,7 @@ public class RegistrarPontoService {
         entities.forEach(entity -> {
             final var registroPontoDto = RegistroPontoDTO.builder()
                     .dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
-                    //.tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistro()))
+                    .tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
                     .build();
 
             registroPontoDTOS.add(registroPontoDto);
@@ -69,7 +78,7 @@ public class RegistrarPontoService {
         pontosDeOntemList.forEach(entity -> {
             final var registroPontoDto = RegistroPontoDTO.builder()
                     .dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
-                    //.tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistro()))
+                    .tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
                     .build();
 
             registroPontoAtualSnapshotDTO.getRegistroPontoOntemList().add(registroPontoDto);
@@ -78,7 +87,7 @@ public class RegistrarPontoService {
         pontoDeHojeList.forEach(entity -> {
             final var registroPontoDto = RegistroPontoDTO.builder()
                     .dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
-                    //.tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistro()))
+                    .tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
                     .build();
 
             registroPontoAtualSnapshotDTO.getRegistroPontoHojeList().add(registroPontoDto);
