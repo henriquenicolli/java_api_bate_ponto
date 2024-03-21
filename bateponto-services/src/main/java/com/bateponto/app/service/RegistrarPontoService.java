@@ -43,71 +43,41 @@ public class RegistrarPontoService {
         return true;
     }
 
-
     public List<RegistroPontoDTO> getEspelhoPontoMes(final String mes) {
         List<RegistroPontoDTO> registroPontoDTOS = new ArrayList<>();
         List<RegistroPontoEntity> entities = registroPontoRepository.findByMes(DateUtil.getMes(mes));
 
-        entities.forEach(entity -> {
-            final var registroPontoDto = RegistroPontoDTO.builder()
-                    .dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
-                    .tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
-                    .build();
-
-            registroPontoDTOS.add(registroPontoDto);
-        });
+        adicionaRegistroPonto(entities, registroPontoDTOS);
 
         return registroPontoDTOS;
     }
 
 
     public RegistroPontoAtualSnapshotDTO getRegistroPontoAtualSnapshot() {
-        RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO = new RegistroPontoAtualSnapshotDTO();
+        final RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO = new RegistroPontoAtualSnapshotDTO();
 
-        List<RegistroPontoEntity> entities = registroPontoRepository.findByDataDeHojeEOntem();
+        final List<RegistroPontoEntity> entities = registroPontoRepository.findByDataDeHojeEOntem();
 
-        List<RegistroPontoEntity> pontosDeOntemList = entities.stream()
-                .filter(entity -> entity.getDataHoraRegistroPonto()
-                        .toLocalDate().equals(LocalDateTime.now().minusDays(1).toLocalDate()))
-                .toList();
+        popularRegistrosPonto(entities, registroPontoAtualSnapshotDTO);
+        calculaHorasTrabalhasHoje(registroPontoAtualSnapshotDTO);
+        calculaHorasTrabalhasOntem(registroPontoAtualSnapshotDTO);
 
-        List<RegistroPontoEntity> pontoDeHojeList = entities.stream()
-                .filter(entity -> entity.getDataHoraRegistroPonto().toLocalDate().equals(LocalDateTime.now().toLocalDate()))
-                .toList();
-
-        pontosDeOntemList.forEach(entity -> {
-            final var registroPontoDto = RegistroPontoDTO.builder()
-                    .dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
-                    .tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
-                    .build();
-
-            registroPontoAtualSnapshotDTO.getRegistroPontoOntemList().add(registroPontoDto);
-        });
-
-        pontoDeHojeList.forEach(entity -> {
-            final var registroPontoDto = RegistroPontoDTO.builder()
-                    .dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
-                    .tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
-                    .build();
-
-            registroPontoAtualSnapshotDTO.getRegistroPontoHojeList().add(registroPontoDto);
-        });
-
+        //todo mock de horas extras e horas compensaveis
         registroPontoAtualSnapshotDTO.setHorasExtrasMes(LocalTime.of(1,25));
         registroPontoAtualSnapshotDTO.setHorasCompensaveisMes(LocalTime.of(4,30));
 
-        // horas trabalhadas de hoje
-        LocalTime horasTrabalhadasHoje = LocalTime.of(0, 0);
-        for (int i = 1; i < registroPontoAtualSnapshotDTO.getRegistroPontoHojeList().size(); i++) {
-            LocalDateTime dataAnterior = registroPontoAtualSnapshotDTO.getRegistroPontoHojeList().get(i - 1).getDataHoraRegistroPonto();
-            LocalDateTime dataAtual = registroPontoAtualSnapshotDTO.getRegistroPontoHojeList().get(i).getDataHoraRegistroPonto();
-            Duration diff = calcularDiferencaHorasMinutos(dataAnterior, dataAtual);
-            System.out.println("Diferença entre " + dataAnterior + " e " + dataAtual + ": " +
-                    diff.toHours() + " horas e " + (diff.toMinutesPart()) + " minutos.");
-            horasTrabalhadasHoje = horasTrabalhadasHoje.plusHours(diff.toHours()).plusMinutes(diff.toMinutesPart());
-        }
+        return registroPontoAtualSnapshotDTO;
+    }
 
-        // horas trabalhadas de ontem
+    private void popularRegistrosPonto(List<RegistroPontoEntity> entities, RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
+        List<RegistroPontoEntity> pontosDeOntemList = filterRegistroPontoList(entities, LocalDateTime.now().minusDays(1));
+        List<RegistroPontoEntity> pontoDeHojeList = filterRegistroPontoList(entities, LocalDateTime.now());
+
+        adicionaRegistroPonto(pontosDeOntemList, registroPontoAtualSnapshotDTO.getRegistroPontoOntemList());
+        adicionaRegistroPonto(pontoDeHojeList, registroPontoAtualSnapshotDTO.getRegistroPontoHojeList());
+    }
+
+    private void calculaHorasTrabalhasOntem(RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
         LocalTime horasTrabalhadasOntem = LocalTime.of(0, 0);
         for (int i = 1; i < registroPontoAtualSnapshotDTO.getRegistroPontoOntemList().size(); i++) {
             LocalDateTime dataAnterior = registroPontoAtualSnapshotDTO.getRegistroPontoOntemList().get(i - 1).getDataHoraRegistroPonto();
@@ -117,14 +87,41 @@ public class RegistrarPontoService {
                     diff.toHours() + " horas e " + (diff.toMinutesPart()) + " minutos.");
             horasTrabalhadasOntem = horasTrabalhadasOntem.plusHours(diff.toHours()).plusMinutes(diff.toMinutesPart());
         }
-
-        registroPontoAtualSnapshotDTO.setHorasTrabalhadasHoje(horasTrabalhadasHoje);
         registroPontoAtualSnapshotDTO.setHorasTrabalhadasOntem(horasTrabalhadasOntem);
-
-        return registroPontoAtualSnapshotDTO;
     }
 
-    public static Duration calcularDiferencaHorasMinutos(LocalDateTime inicio, LocalDateTime fim) {
+    private void calculaHorasTrabalhasHoje(RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
+        LocalTime horasTrabalhadasHoje = LocalTime.of(0, 0);
+        for (int i = 1; i < registroPontoAtualSnapshotDTO.getRegistroPontoHojeList().size(); i++) {
+            LocalDateTime dataAnterior = registroPontoAtualSnapshotDTO.getRegistroPontoHojeList().get(i - 1).getDataHoraRegistroPonto();
+            LocalDateTime dataAtual = registroPontoAtualSnapshotDTO.getRegistroPontoHojeList().get(i).getDataHoraRegistroPonto();
+            Duration diff = calcularDiferencaHorasMinutos(dataAnterior, dataAtual);
+            System.out.println("Diferença entre " + dataAnterior + " e " + dataAtual + ": " +
+                    diff.toHours() + " horas e " + (diff.toMinutesPart()) + " minutos.");
+            horasTrabalhadasHoje = horasTrabalhadasHoje.plusHours(diff.toHours()).plusMinutes(diff.toMinutesPart());
+        }
+        registroPontoAtualSnapshotDTO.setHorasTrabalhadasHoje(horasTrabalhadasHoje);
+    }
+
+    private void adicionaRegistroPonto(List<RegistroPontoEntity> registroPontoEntities, List<RegistroPontoDTO> registroPontoDTO) {
+        registroPontoEntities.forEach(entity -> {
+            final var registroPontoDto = RegistroPontoDTO.builder()
+                    .dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
+                    .tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
+                    .build();
+
+            registroPontoDTO.add(registroPontoDto);
+        });
+    }
+
+    private List<RegistroPontoEntity> filterRegistroPontoList(List<RegistroPontoEntity> entities, LocalDateTime minusDays) {
+        return entities.stream()
+                .filter(entity -> entity.getDataHoraRegistroPonto()
+                        .toLocalDate().equals(minusDays.toLocalDate()))
+                .toList();
+    }
+
+    public Duration calcularDiferencaHorasMinutos(LocalDateTime inicio, LocalDateTime fim) {
         return Duration.between(inicio, fim);
     }
 
