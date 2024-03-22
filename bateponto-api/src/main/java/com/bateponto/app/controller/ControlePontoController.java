@@ -3,6 +3,7 @@ package com.bateponto.app.controller;
 import com.bateponto.app.model.dto.RegistroPontoDTO;
 import com.bateponto.app.model.dto.RegistroPontoAtualSnapshotDTO;
 import com.bateponto.app.service.RegistrarPontoService;
+import com.bateponto.app.service.RegistroPontoSnapshotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,9 @@ public class ControlePontoController {
 
     @Autowired
     private RegistrarPontoService registrarPontoService;
+
+    @Autowired
+    private RegistroPontoSnapshotService registroPontoSnapshotService;
 
     @PostMapping(value = "/registrar")
     public ResponseEntity<String> registrarPonto(@RequestBody RegistroPontoDTO registroPontoDTO) {
@@ -45,7 +49,7 @@ public class ControlePontoController {
     @GetMapping(value = "/registros/atual/snapshot")
     public ResponseEntity<RegistroPontoAtualSnapshotDTO> getRegistroPontoAtualSnapshot() {
 
-        RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO = registrarPontoService
+        RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO = registroPontoSnapshotService
                 .getRegistroPontoAtualSnapshot();
 
         return ResponseEntity.ok(registroPontoAtualSnapshotDTO);
