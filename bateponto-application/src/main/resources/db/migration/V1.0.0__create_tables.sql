@@ -231,6 +231,25 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_TBL_EMPR_ENDC_TBL_EMPRESA1_idx` ON `DB_BATE_PONTO`.`TBL_EMPR_ENDC` (`id_empresa` ASC) VISIBLE;
 
 
+-- -----------------------------------------------------
+-- Table `DB_BATE_PONTO`.`TBL_EMPR_CONFIG`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_BATE_PONTO`.`TBL_EMPR_CONFIG` (
+  `id_empresa_config` INT NOT NULL,
+  `carga_horaria_mensal` INT NULL,
+  `carga_horaria_diaria` INT NULL,
+  `id_empresa` INT NOT NULL,
+  PRIMARY KEY (`id_empresa_config`),
+  CONSTRAINT `fk_TBL_EMPR_CONFIG_TBL_EMPRESA1`
+    FOREIGN KEY (`id_empresa`)
+    REFERENCES `DB_BATE_PONTO`.`TBL_EMPRESA` (`id_empresa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_TBL_EMPR_CONFIG_TBL_EMPRESA1_idx` ON `DB_BATE_PONTO`.`TBL_EMPR_CONFIG` (`id_empresa` ASC) VISIBLE;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
