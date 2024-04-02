@@ -5,8 +5,6 @@ import com.bateponto.app.model.dto.RegistroPontoAtualSnapshotDTO;
 import com.bateponto.app.model.dto.RegistroPontoDTO;
 import com.bateponto.app.model.enums.TipoRegistro;
 import com.bateponto.app.repository.RegistroPontoRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +12,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Service
 public class RegistroPontoSnapshotService {
@@ -21,7 +20,10 @@ public class RegistroPontoSnapshotService {
     @Autowired
     private RegistroPontoRepository registroPontoRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(RegistrarPontoService.class);
+    @Autowired
+    private RegistroPontoService registroPontoService;
+
+    private static final LocalTime CARGA_HORARIA_DIARIA = LocalTime.of(7, 15);
 
     public RegistroPontoAtualSnapshotDTO getRegistroPontoAtualSnapshot() {
         final RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO = new RegistroPontoAtualSnapshotDTO();
@@ -31,25 +33,31 @@ public class RegistroPontoSnapshotService {
         popularRegistrosPonto(entities, registroPontoAtualSnapshotDTO);
         calculaHorasTrabalhasHoje(registroPontoAtualSnapshotDTO);
         calculaHorasTrabalhasOntem(registroPontoAtualSnapshotDTO);
-
-        //todo mock de horas extras e horas compensaveis
-        registroPontoAtualSnapshotDTO.setHorasExtrasMes(LocalTime.of(1,25));
-        registroPontoAtualSnapshotDTO.setHorasCompensaveisMes(LocalTime.of(4,30));
+        calculaHorasExtras(registroPontoAtualSnapshotDTO);
 
         return registroPontoAtualSnapshotDTO;
     }
 
+    private void calculaHorasExtras(RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
+        Duration duration = calcularDiferencaHorasMinutos(CARGA_HORARIA_DIARIA, registroPontoAtualSnapshotDTO.getHorasTrabalhadasHoje());
+        if (duration.isNegative()) {
+            registroPontoAtualSnapshotDTO.setHorasExtrasHoje(LocalTime.of(0, 0));
+        } else {
+            registroPontoAtualSnapshotDTO.setHorasExtrasHoje(durationToLocalTime(duration));
+        }
+    }
+
     private void popularRegistrosPonto(List<RegistroPontoEntity> entities, RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
-        List<RegistroPontoEntity> pontosDeOntemList = filterRegistroPontoList(entities, LocalDateTime.now().minusDays(1));
-        List<RegistroPontoEntity> pontoDeHojeList = filterRegistroPontoList(entities, LocalDateTime.now());
+        List<RegistroPontoEntity> pontosDeOntemList = filterRegistroPontoListByLocalDateTime(entities, LocalDateTime.now().minusDays(1));
+        List<RegistroPontoEntity> pontoDeHojeList = filterRegistroPontoListByLocalDateTime(entities, LocalDateTime.now());
 
         adicionaRegistroPonto(pontosDeOntemList, registroPontoAtualSnapshotDTO.getRegistroPontoOntemList());
         adicionaRegistroPonto(pontoDeHojeList, registroPontoAtualSnapshotDTO.getRegistroPontoHojeList());
     }
 
-    private List<RegistroPontoEntity> filterRegistroPontoList(List<RegistroPontoEntity> entities, LocalDateTime minusDays) {
+    private List<RegistroPontoEntity> filterRegistroPontoListByLocalDateTime(List<RegistroPontoEntity> entities, LocalDateTime localDateTime) {
         return entities.stream()
-                .filter(entity -> entity.getDataHoraRegistroPonto().toLocalDate().equals(minusDays.toLocalDate()))
+                .filter(entity -> entity.getDataHoraRegistroPonto().toLocalDate().equals(localDateTime.toLocalDate()))
                 .toList();
     }
 
@@ -64,36 +72,42 @@ public class RegistroPontoSnapshotService {
         });
     }
 
-    public void calculaHorasTrabalhasOntem(RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
+    private void calculaHorasTrabalhasOntem(RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
         registroPontoAtualSnapshotDTO.setHorasTrabalhadasOntem(
                 calculaHorasTrabalhadas(registroPontoAtualSnapshotDTO.getRegistroPontoOntemList()
                 ));
     }
 
-    public void calculaHorasTrabalhasHoje(RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
+    private void calculaHorasTrabalhasHoje(RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
         registroPontoAtualSnapshotDTO.setHorasTrabalhadasHoje(
                 calculaHorasTrabalhadas(registroPontoAtualSnapshotDTO.getRegistroPontoHojeList()
                 ));
     }
 
     private LocalTime calculaHorasTrabalhadas(List<RegistroPontoDTO> registroPontoList) {
-
         if (registroPontoList.isEmpty()) {
             return LocalTime.MIN;
         }
 
-        LocalTime horasTrabalhadas = LocalTime.MIN;
-        for (int i = 1; i < registroPontoList.size(); i++) {
-            LocalDateTime dataAnterior = registroPontoList.get(i - 1).getDataHoraRegistroPonto();
-            LocalDateTime dataAtual = registroPontoList.get(i).getDataHoraRegistroPonto();
-            Duration diff = calcularDiferencaHorasMinutos(dataAnterior, dataAtual);
-            logger.info("Diferença entre {} e {}: {} horas e {} minutos.", dataAnterior, dataAtual, diff.toHours(), diff.toMinutesPart());
-            horasTrabalhadas = horasTrabalhadas.plusHours(diff.toHours()).plusMinutes(diff.toMinutesPart());
-        }
-        return horasTrabalhadas;
+        Duration totalDuration = IntStream.range(0, registroPontoList.size())
+                .filter(i -> i % 2 == 0 && i + 1 < registroPontoList.size())
+                .mapToObj(i -> calcularDiferencaHorasMinutos(
+                        registroPontoList.get(i).getDataHoraRegistroPonto(),
+                        registroPontoList.get(i + 1).getDataHoraRegistroPonto()))
+                .reduce(Duration.ZERO, Duration::plus);
+
+        return durationToLocalTime(totalDuration);
+    }
+
+    private LocalTime durationToLocalTime(Duration duration) {
+        return LocalTime.of((int) duration.toHoursPart(), duration.toMinutesPart());
     }
 
     public Duration calcularDiferencaHorasMinutos(LocalDateTime inicio, LocalDateTime fim) {
+        return Duration.between(inicio, fim);
+    }
+
+    public Duration calcularDiferencaHorasMinutos(LocalTime inicio, LocalTime fim) {
         return Duration.between(inicio, fim);
     }
 

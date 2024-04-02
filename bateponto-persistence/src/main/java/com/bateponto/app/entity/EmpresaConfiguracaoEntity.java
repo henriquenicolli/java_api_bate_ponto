@@ -16,12 +16,12 @@ public class EmpresaConfiguracaoEntity {
 
     @Id
     @Column(name = "id_empresa_config")
-    private Integer idTipoRegistroPonto;
+    private Integer idEmpresaConfig;
 
     @Column(name = "carga_horaria_mensal")
     private Integer cargaHorariaMensal;
 
-    @Column(name = "TBL_EMPRESA_id_empresa")
+    @Column(name = "id_empresa")
     private Integer id_empresa;
 
 }

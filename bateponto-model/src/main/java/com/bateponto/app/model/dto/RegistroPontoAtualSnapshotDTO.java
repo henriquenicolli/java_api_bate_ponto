@@ -13,12 +13,12 @@ public class RegistroPontoAtualSnapshotDTO {
 
     private List<RegistroPontoDTO> registroPontoOntemList = new ArrayList<>();
 
-    private LocalTime horasTrabalhadasHoje;
+    private LocalTime horasTrabalhadasHoje = LocalTime.MIN;
 
-    private LocalTime horasTrabalhadasOntem;
+    private LocalTime horasTrabalhadasOntem = LocalTime.MIN;
 
-    private LocalTime horasExtrasMes;
+    private LocalTime horasExtrasMes = LocalTime.MIN;
 
-    private LocalTime horasCompensaveisMes;
+    private LocalTime horasExtrasHoje = LocalTime.MIN;
 
 }

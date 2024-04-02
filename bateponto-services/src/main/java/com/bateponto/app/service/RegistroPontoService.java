@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RegistrarPontoService {
+public class RegistroPontoService {
 
     @Autowired
     private RegistroPontoRepository registroPontoRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(RegistrarPontoService.class);
+    private static final Logger logger = LoggerFactory.getLogger(RegistroPontoService.class);
 
     public boolean registrarPonto(final RegistroPontoDTO registroPontoDTO) {
         final var registroPontoEntity = RegistroPontoEntity.builder()
@@ -43,9 +43,9 @@ public class RegistrarPontoService {
         return true;
     }
 
-    public List<RegistroPontoDTO> getEspelhoPontoMes(final String mes) {
+    public List<RegistroPontoDTO> getEspelhoPontoMes(final int mes) {
         List<RegistroPontoDTO> registroPontoDTOS = new ArrayList<>();
-        List<RegistroPontoEntity> entities = registroPontoRepository.findByMes(DateUtil.getMes(mes));
+        List<RegistroPontoEntity> entities = registroPontoRepository.findByMes(mes);
 
         adicionaRegistroPonto(entities, registroPontoDTOS);
 
