@@ -265,21 +265,21 @@ a três milímetros.
 
 10. O registro da marcação de ponto gravada na ARP consistirá dos seguintes campos:
 
-   a) NSR
-
-   b)  CPF do Trabalhador;
-
-   c) data da marcação
-
-   d) horário de marcação, composto de hora, minutos e fuso horário;
-
-   e) data da gravação do registro;
-
-   f) horário da gravação do registro, composto de hora, minutos e fuso horário
-
-   g) identificação do coletor; e
-
-   h) código hash (SHA-256).
+       a) NSR
+    
+       b)  CPF do Trabalhador;
+    
+       c) data da marcação
+    
+       d) horário de marcação, composto de hora, minutos e fuso horário;
+    
+       e) data da gravação do registro;
+    
+       f) horário da gravação do registro, composto de hora, minutos e fuso horário
+    
+       g) identificação do coletor; e
+    
+       h) código hash (SHA-256).
 
 
 11. Gerar o Arquivo Fonte de Dados - AFD, a partir dos dados armazenados na ARP, em
