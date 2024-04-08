@@ -35,13 +35,13 @@
 A Portaria 671 é a lei responsável por permitir o registro do ponto digital, validando o uso dos chamados pontos alternativos. O Pontomais salva as informações de jornada de trabalho e os registros de ponto na nuvem, como previsto e exigido pela lei.
 
 ***
-realizar a emissão dos arquivos AFD e AEJ, obrigatórios em caso de solicitação do auditor fiscal do trabalho. São mais de 20 relatórios gerenciais em poucos cliques, dando mais segurança jurídica para a empresa e agilidade no setor de RH.
+Realizar a emissão dos arquivos AFD e AEJ, obrigatórios em caso de solicitação do auditor fiscal do trabalho. São mais de 20 relatórios gerenciais em poucos cliques, dando mais segurança jurídica para a empresa e agilidade no setor de RH.
 
 
 
 ***
 DA JORNADA DE TRABALHO
-- CAP 5, pag 13, subsecao 1
+CAP 5, pag 13, subsecao 1
 
 Art. 78. O REP-P é o programa (software) executado em servidor dedicado ou em ambiente de
 nuvem com certificado de registro nos termos do art. 91, utilizado exclusivamente para o registro de
@@ -194,8 +194,10 @@ Nacional da Propriedade Industrial, atender ao art. 78 e aos requisitos elencado
 --------------------------------
 
 ANEXO IX
-- REQUISITOS DO REGISTRADOR ELETRÔNICO DE PONTOVIA PROGRAMA - REP-P
-- O REP-P deve apresentar os seguintes requisitos:
+REQUISITOS DO REGISTRADOR ELETRÔNICO DE PONTOVIA PROGRAMA - REP-P
+
+O REP-P deve apresentar os seguintes requisitos:
+
 1. Permitir a identificação da organização e do trabalhador.
 2. Possuir ou acessar relógio que mantenha sincronismo com a Hora Legal Brasileira (HLB)
    disseminada pelo Observatório Nacional (ON), com uma variação de no máximo 30 (trinta) segundos.
