@@ -6,24 +6,24 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.2</version>
+		<version>3.2.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.bateponto.app</groupId>
-	<artifactId>bateponto</artifactId>
+	<groupId>com.rep.app</groupId>
+	<artifactId>rep</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>bateponto</name>
-	<description>Api for bate ponto app</description>
+    <name>rep</name>
+	<description>Api for registro-ponto-eletronico (REP)</description>
 
     <modules>
-        <module>bateponto-application</module>
-		<module>bateponto-api</module>
-		<module>bateponto-services</module>
-		<module>bateponto-model</module>
-		<module>bateponto-core</module>
-		<module>bateponto-persistence</module>
+        <module>rep-application</module>
+		<module>rep-api</module>
+		<module>rep-services</module>
+		<module>rep-model</module>
+		<module>rep-core</module>
+		<module>rep-persistence</module>
 	</modules>
 
     <properties>
@@ -83,19 +83,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-parent</artifactId>
-				<version>3.2.2</version>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
