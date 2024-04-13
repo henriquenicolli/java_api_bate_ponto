@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+@Deprecated
 @CrossOrigin
 @RestController
 @RequestMapping("/v1/rep")

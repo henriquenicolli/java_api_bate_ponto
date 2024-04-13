@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 @Service
 public class RegistroPontoService {
 
@@ -20,7 +21,7 @@ public class RegistroPontoService {
 
     public boolean registrarPonto(final RegistroPontoDTO registroPontoDTO) {
         // TODO FIX ME
-        final var registroPontoEntity = RegistroPontoEntity.builder()
+        //final var registroPontoEntity = RegistroPontoEntity.builder()
                 //mock funcionario
                 //.empregadoEntity(EmpregadoEntity.builder()
                 //        .idFuncionario(1)
@@ -31,7 +32,7 @@ public class RegistroPontoService {
                 //.tipoRegistroPontoEntity(TipoRegistroPontoEntity.builder()
                 //        .idTipoRegistroPonto(registroPontoDTO.getTipoRegistro().getCodigo())
                 //        .build())
-                .build();
+        //        .build();
 
         //registroPontoRepository.save(registroPontoEntity);
 
@@ -50,12 +51,12 @@ public class RegistroPontoService {
     private void adicionaRegistroPonto(List<RegistroPontoEntity> registroPontoEntities, List<RegistroPontoDTO> registroPontoDTO) {
         // TODO FIX ME
         registroPontoEntities.forEach(entity -> {
-            final var registroPontoDto = RegistroPontoDTO.builder()
+            //final var registroPontoDto = RegistroPontoDTO.builder()
                     //.dataHoraRegistroPonto(entity.getDataHoraRegistroPonto())
                     //.tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
-                    .build();
+        //            .build();
 
-            registroPontoDTO.add(registroPontoDto);
+            registroPontoDTO.add(null);
         });
     }
 

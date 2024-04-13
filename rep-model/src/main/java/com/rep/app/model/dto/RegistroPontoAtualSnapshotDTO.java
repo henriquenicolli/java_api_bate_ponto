@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 @Data
 public class RegistroPontoAtualSnapshotDTO {
 
