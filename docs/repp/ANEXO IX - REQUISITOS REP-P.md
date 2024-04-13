@@ -30,5 +30,5 @@ O REP-P deve apresentar os seguintes requisitos:
 	7. identificação do coletor; e 
 	8. código hash (SHA-256).
 11. Gerar o Arquivo Fonte de Dados - AFD, a partir dos dados armazenados na ARP, em conformidade com o Anexo I desta Portaria.
-12. 12. Possibilitar a geração do AFD para um determinado intervalo temporal
+12.  Possibilitar a geração do AFD para um determinado intervalo temporal
 13. Todos os equipamentos e programas informatizados que integram o REP-P devem apresentar alta disponibilidade, de modo a não comprometer o serviço de registro de ponto em qualquer uma de suas etapas.

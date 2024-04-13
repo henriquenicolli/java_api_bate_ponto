@@ -4,71 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "2b8cb78aef0dbe0a",
+        "id": "9fc8d188e52adf3f",
         "type": "tabs",
         "children": [
           {
-            "id": "8f96d18faad37a1f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "SISTEMA DE REGISTRO DE PONTO ELETRONICO.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "13acdaef27d22bf6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "REP-P - Art 78.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f27564c870cfed81",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ANEXO IX - REQUISITOS REP-P.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "d3463edfd94c7ad7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "SISTEMA DE REGISTRO DE PONTO ELETRONICO.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "9afdae4f4da2eb47",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ANEXO VI - ARQUIVO ELETRÔNICO DE JORNADA - AEJ.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e5ab20acdc7e980e",
+            "id": "ef244a6eed9878fe",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -79,8 +19,7 @@
               }
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -207,14 +146,14 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "e5ab20acdc7e980e",
+  "active": "ef244a6eed9878fe",
   "lastOpenFiles": [
     "ANEXO V - ARQUIVO FONTE DE DADOS - AFD.md",
+    "ANEXO IX - REQUISITOS REP-P.md",
     "ANEXO VI - ARQUIVO ELETRÔNICO DE JORNADA - AEJ.md",
     "ANEXO VII - ATESTADO TÉCNICO E TERMO DE RESPONSABILIDADE.md",
-    "ANEXO IX - REQUISITOS REP-P.md",
+    "REP-P - Art 78 - DEFINICAO.md",
     "SISTEMA DE REGISTRO DE PONTO ELETRONICO.md",
-    "REP-P - Art 78.md",
     "Servidor.md"
   ]
 }
