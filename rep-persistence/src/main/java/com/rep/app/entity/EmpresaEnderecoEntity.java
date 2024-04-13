@@ -14,7 +14,7 @@ public class EmpresaEnderecoEntity {
 
     @Id
     @Column(name = "id_endereco")
-    private Integer idEndereco;
+    private String idEndereco;
 
     @Column(name = "logradouro")
     private String logradouro;

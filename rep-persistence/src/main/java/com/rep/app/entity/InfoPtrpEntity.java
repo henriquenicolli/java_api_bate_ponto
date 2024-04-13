@@ -8,7 +8,7 @@ public class InfoPtrpEntity {
 
     @Id
     @Column(name = "id_info_ptrp")
-    private int idInfoPtrp;
+    private String idInfoPtrp;
 
     @Column(name = "nome_ptrp")
     private String nomePtrp;

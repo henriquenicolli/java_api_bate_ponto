@@ -18,7 +18,7 @@ public class RegistroPontoEntity {
 
     @Id
     @Column(name = "id_registro_ponto")
-    private int idRegistroPonto;
+    private String idRegistroPonto;
 
     @Column(name = "num_seq_registro")
     private int numSeqRegistro;

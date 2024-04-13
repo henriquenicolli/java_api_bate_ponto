@@ -13,7 +13,7 @@ public class EmpregadoRemuneracaoEntity {
 
     @Id
     @Column(name = "id_emprg_remuneracao")
-    private Integer idEmpregadoRemuneracao;
+    private String idEmpregadoRemuneracao;
 
     @ManyToOne
     @JoinColumn(name = "id_empregado", referencedColumnName = "id_empregado")

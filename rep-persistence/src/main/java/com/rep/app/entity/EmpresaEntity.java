@@ -15,7 +15,7 @@ public class EmpresaEntity {
 
     @Id
     @Column(name = "id_empresa")
-    private int idEmpresa;
+    private String idEmpresa;
 
     @Column(name = "num_seq_registro")
     private int numSeqRegistro;
@@ -27,7 +27,7 @@ public class EmpresaEntity {
     private String razaoSocial;
 
     @Column(name = "tipo_idef_empregador")
-    private String tipoIdentificacaoEmpregador;
+    private String tipoIdefEmpregador;
 
     @Column(name = "cnpj")
     private long cnpj;
@@ -50,11 +50,12 @@ public class EmpresaEntity {
     @Column(name = "tipo_operacao_inclusao_alteracao")
     private String tipoOperacaoInclusaoAlteracao;
 
-    @Column(name = "codigo_usuario_inclusao_alteracao")
-    private String codigoUsuarioInclusaoAlteracao;
-
     @OneToOne
     @JoinColumn(name = "id_telefone")
     private TelefoneEntity telefone;
+
+    @ManyToOne
+    @JoinColumn(name = "id_usuario_inclusao_alteracao")
+    private UsuarioEntity usuarioInclusaoAlteracao;
 
 }

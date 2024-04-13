@@ -14,8 +14,8 @@ import java.time.LocalDate;
 public class EmpregadoLicencaEntity {
 
     @Id
-    @Column(name = "id_emprg_licensa")
-    private int idEmpregadoLicenca;
+    @Column(name = "id_emprg_licenca")
+    private String idEmpregadoLicenca;
 
     @Column(name = "data_inicio")
     private LocalDate dataInicio;
@@ -28,7 +28,7 @@ public class EmpregadoLicencaEntity {
     private EmpregadoEntity empregado;
 
     @ManyToOne
-    @JoinColumn(name = "id_tipo_licenca")
+    @JoinColumn(name = "cod_tipo_licenca")
     private TipoLicencaEntity tipoLicenca;
 
 }

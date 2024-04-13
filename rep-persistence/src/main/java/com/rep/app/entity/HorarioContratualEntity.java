@@ -9,8 +9,8 @@ import java.time.LocalTime;
 public class HorarioContratualEntity {
 
     @Id
-    @Column(name = "codigo_hora_contratual")
-    private int codigoHoraContratual;
+    @Column(name = "cod_hora_contratual")
+    private int codHoraContratual;
 
     @Column(name = "duracao_jornada")
     private int duracaoJornada;

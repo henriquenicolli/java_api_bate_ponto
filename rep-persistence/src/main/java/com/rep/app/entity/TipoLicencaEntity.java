@@ -12,7 +12,7 @@ import lombok.*;
 public class TipoLicencaEntity {
 
     @Id
-    @Column(name = "id_tipo_licenca")
+    @Column(name = "cod_tipo_licenca")
     private int idTipoLicenca;
 
     @Column(name = "descricao")

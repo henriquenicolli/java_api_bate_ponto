@@ -10,7 +10,7 @@ public class BancoHorasEntity {
 
     @Id
     @Column(name = "id_banco_horas")
-    private int idBancoHoras;
+    private String idBancoHoras;
 
     @Column(name = "tipo_ausencia_compensacao")
     private String tipoAusenciaCompensacao;

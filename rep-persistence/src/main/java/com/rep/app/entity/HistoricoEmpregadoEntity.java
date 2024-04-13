@@ -10,7 +10,7 @@ public class HistoricoEmpregadoEntity {
 
     @Id
     @Column(name = "id_historico_empregado")
-    private int idHistoricoEmpregado;
+    private String idHistoricoEmpregado;
 
     @Column(name = "num_seq_registro")
     private int numSeqRegistro;
@@ -27,5 +27,9 @@ public class HistoricoEmpregadoEntity {
     @ManyToOne
     @JoinColumn(name = "id_empregado")
     private EmpregadoEntity empregado;
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private UsuarioEntity idUsuarioInclusaoAlteracao;
 
 }

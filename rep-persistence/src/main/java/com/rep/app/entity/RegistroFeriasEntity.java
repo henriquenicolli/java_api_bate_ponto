@@ -16,7 +16,7 @@ public class RegistroFeriasEntity {
 
     @Id
     @Column(name = "id_registro_ferias")
-    private int idRegistroFerias;
+    private String idRegistroFerias;
 
     @Column(name = "data_inicio")
     private LocalDateTime dataInicio;

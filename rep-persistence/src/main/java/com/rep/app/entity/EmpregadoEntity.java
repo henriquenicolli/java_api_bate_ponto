@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -16,10 +15,10 @@ public class EmpregadoEntity {
 
     @Id
     @Column(name = "id_empregado")
-    private int idEmpregado;
+    private String idEmpregado;
 
     @Column(name = "num_seq_registro")
-    private String numSeqRegistro;
+    private int numSeqRegistro;
 
     @Column(name = "emp_nome")
     private String empNome;
@@ -29,6 +28,9 @@ public class EmpregadoEntity {
 
     @Column(name = "data_admissao")
     private LocalDate dataAdmissao;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "departamento")
     private String departamento;
@@ -59,13 +61,13 @@ public class EmpregadoEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_empresa_endereco")
-    private EnderecoEntity endereco;
+    private EmpresaEnderecoEntity enderecoEmpresa;
 
     @ManyToOne
-    @JoinColumn(name = "id_horario_contratual")
+    @JoinColumn(name = "cod_horario_contratual")
     private HorarioContratualEntity horarioContratual;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_telefone")
     private TelefoneEntity telefone;
 

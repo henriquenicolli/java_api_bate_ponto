@@ -12,7 +12,7 @@ public class TelefoneEntity {
 
     @Id
     @Column(name = "id_telefone_emp")
-    private int idTelefoneEmp;
+    private String idTelefoneEmp;
 
     @Column(name = "telefone")
     private String telefone;

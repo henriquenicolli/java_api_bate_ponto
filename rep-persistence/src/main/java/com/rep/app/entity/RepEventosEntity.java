@@ -8,7 +8,7 @@ public class RepEventosEntity {
 
     @Id
     @Column(name = "id_rep_evento")
-    private int idRepEvento;
+    private String idRepEvento;
 
     @Column(name = "numero_sequencial_registros")
     private String numeroSequencialRegistros;
