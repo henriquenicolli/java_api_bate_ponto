@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/rep/empresa")
 public class EmpresaController {
 
-
     private static final Logger LOGGER = LoggerFactory.getLogger(EmpresaController.class);
 
     @Autowired

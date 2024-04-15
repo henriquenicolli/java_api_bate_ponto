@@ -1,15 +1,14 @@
 package com.rep.app.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Entity(name = "TBL_EMPR_ENDC")
+@Getter
+@Setter
+@Entity
+@Table(name = "TBL_EMPR_ENDC")
 public class EmpresaEnderecoEntity {
 
     @Id
@@ -33,6 +32,9 @@ public class EmpresaEnderecoEntity {
 
     @Column(name = "pais")
     private String pais;
+
+    @Column(name = "excluido")
+    private boolean excluido;
 
     @ManyToOne
     @JoinColumn(name = "id_empresa", referencedColumnName = "id_empresa")

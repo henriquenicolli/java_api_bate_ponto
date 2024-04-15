@@ -16,10 +16,10 @@ public class TipoOperacaoInslucaoAlteracaoConverter implements AttributeConverte
     }
 
     @Override
-    public TipoOperacaoInslucaoAlteracao convertToEntityAttribute(String dbData) {
+    public TipoOperacaoInslucaoAlteracao convertToEntityAttribute(final String dbData) {
         if (dbData == null) {
             return null;
         }
-        return TipoOperacaoInslucaoAlteracao.valueOf(dbData);
+        return TipoOperacaoInslucaoAlteracao.fromTipoOperacao(dbData);
     }
 }

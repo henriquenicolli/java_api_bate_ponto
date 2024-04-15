@@ -4,17 +4,18 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Entity(name = "TBL_EMPREGADO")
+@Getter
+@Setter
+@Entity
+@Table(name = "TBL_EMPREGADO")
 public class EmpregadoEntity {
 
     @Id
-    @Column(name = "id_empregado")
+    @Column(name = "id_empregado", updatable = false, nullable = false)
     private String idEmpregado;
 
     @Column(name = "num_seq_registro")
@@ -59,6 +60,9 @@ public class EmpregadoEntity {
     @Column(name = "cod_matricula_esocial")
     private String codMatriculaEsocial;
 
+    @Column(name = "excluido")
+    private boolean excluido;
+
     @ManyToOne
     @JoinColumn(name = "id_empresa_endereco")
     private EmpresaEnderecoEntity enderecoEmpresa;
@@ -71,8 +75,13 @@ public class EmpregadoEntity {
     @JoinColumn(name = "id_telefone")
     private TelefoneEntity telefone;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_empresa")
     private EmpresaEntity empresa;
+
+    @PrePersist
+    public void generateId() {
+        idEmpregado = UUID.randomUUID().toString();
+    }
 
 }

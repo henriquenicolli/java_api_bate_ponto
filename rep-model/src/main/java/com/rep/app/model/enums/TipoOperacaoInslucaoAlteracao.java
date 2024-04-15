@@ -16,5 +16,13 @@ public enum TipoOperacaoInslucaoAlteracao {
         return tipoOperacao;
     }
 
+    public static TipoOperacaoInslucaoAlteracao fromTipoOperacao(final String tipoOperacao) {
+        for (TipoOperacaoInslucaoAlteracao tipo : TipoOperacaoInslucaoAlteracao.values()) {
+            if (tipo.getTipoOperacao().equals(tipoOperacao)) {
+                return tipo;
+            }
+        }
+        return null; // ou lançar uma exceção
+    }
 
 }
