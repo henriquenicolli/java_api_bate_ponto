@@ -49,7 +49,7 @@ Registro do tipo "2" - Inclusão ou alteração da identificação da empresa no
 | 2                   | 010- 010 | 1       | N    | Tipo do registro. Preencher com "2".                                                                              |
 | 3                   | 011-034  | 24      | DH   | Data e hora da gravação do registro.                                                                              |
 | 4                   | 035- 048 | 14      | N    | CPF do responsável pela inclusão ou alteração.                                                                    |
-| 5                   | 049- 049 | 1       | N    | Tipo de identificador do empregador: - "1": CNPJ; - "2": CPF.                                                     |
+| 5                   | 049- 049 | 1       | N    | Tipo de identificador do empregador: <br>- "1": CNPJ; <br>- "2": CPF.                                             |
 | 6                   | 050- 063 | 14      | N    | CNPJ ou CPF do empregador.                                                                                        |
 | 7                   | 064- 077 | 14      | N    | CNO (Cadastro Nacional de Obras) ou CAEPF (Cadastro de Atividade Econômica da Pessoa Física), quando existir.<br> |
 | 8                   | 078- 227 | 150     | A    | Razão social ou nome do empregador.                                                                               |

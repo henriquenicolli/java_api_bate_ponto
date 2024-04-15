@@ -30,11 +30,13 @@ public class UsuarioMapperTest {
         entity.setUserLogin("testLogin");
         entity.setUserPassword("testPassword");
         entity.setUserEmail("testEmail");
+        entity.setIdUsuario("testId");
 
         UsuarioDTO dto = mapper.toDto(entity);
 
         assertThat(dto.getUserLogin()).isEqualTo(entity.getUserLogin());
         assertThat(dto.getUserPassword()).isEqualTo(entity.getUserPassword());
         assertThat(dto.getUserEmail()).isEqualTo(entity.getUserEmail());
+        assertThat(dto.getIdUsuario()).isEqualTo(entity.getIdUsuario());
     }
 }

@@ -1,20 +1,23 @@
 package com.rep.app.entity;
 
+import com.rep.app.converter.TipoOperacaoInslucaoAlteracaoConverter;
+import com.rep.app.model.enums.TipoOperacaoInslucaoAlteracao;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Entity(name = "TBL_EMPRESA")
+@Getter
+@Setter
+@Entity
+@Table(name = "TBL_EMPRESA")
 public class EmpresaEntity {
 
     @Id
-    @Column(name = "id_empresa")
+    @Column(name = "id_empresa", updatable = false, nullable = false)
     private String idEmpresa;
 
     @Column(name = "num_seq_registro")
@@ -47,15 +50,21 @@ public class EmpresaEntity {
     @Column(name = "data_hora_inclusao_alteracao")
     private LocalDateTime dataHoraInclusaoAlteracao;
 
+    @Convert(converter = TipoOperacaoInslucaoAlteracaoConverter.class)
     @Column(name = "tipo_operacao_inclusao_alteracao")
-    private String tipoOperacaoInclusaoAlteracao;
+    private TipoOperacaoInslucaoAlteracao tipoOperacaoInclusaoAlteracao;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_telefone")
     private TelefoneEntity telefone;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario_inclusao_alteracao")
     private UsuarioEntity usuarioInclusaoAlteracao;
+
+    @PrePersist
+    public void generateId() {
+        idEmpresa = UUID.randomUUID().toString();
+    }
 
 }

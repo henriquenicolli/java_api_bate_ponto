@@ -6,7 +6,7 @@
 -- Table `TBL_TELEFONE`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_TELEFONE` (
-  `id_telefone_emp` VARCHAR(36) NOT NULL,
+  `id_telefone_emp` CHAR(36) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
   `cod_operadora` VARCHAR(2) NOT NULL,
   `whatsapp` TINYINT NOT NULL,
@@ -18,9 +18,9 @@ ENGINE = InnoDB;
 -- Table `TBL_USUARIO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_USUARIO` (
-  `id_usuario` VARCHAR(36) NOT NULL,
-  `user_login` VARCHAR(45) NULL,
-  `user_password` VARCHAR(45) NULL,
+  `id_usuario` CHAR(36) NOT NULL,
+  `user_login` VARCHAR(45) NOT NULL,
+  `user_password` VARCHAR(45) NOT NULL,
   `user_email` VARCHAR(45) NULL,
   PRIMARY KEY (`id_usuario`))
 ENGINE = InnoDB;
@@ -30,7 +30,7 @@ ENGINE = InnoDB;
 -- Table `TBL_EMPRESA`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_EMPRESA` (
-  `id_empresa` VARCHAR(36) NOT NULL,
+  `id_empresa` CHAR(36) NOT NULL,
   `num_seq_registro` INT NOT NULL,
   `nome_empresa` VARCHAR(150) NOT NULL,
   `razao_social` VARCHAR(150) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `TBL_EMPRESA` (
   `cod_idef_caepf` DECIMAL(14) NULL,
   `cod_idef_cno` DECIMAL(14) NULL,
   `data_hora_inclusao_alteracao` DATETIME NOT NULL,
-  `tipo_operacao_inclusao_alteracao` VARCHAR(2) NOT NULL,
+  `tipo_operacao_inclusao_alteracao` VARCHAR(1) NOT NULL COMMENT 'Tipo de operação: \n- \n\"I\": inclusão; \n- \n\"A\": alteração; \n- \n\"E\": exclusão.',
   `id_telefone` VARCHAR(36) NOT NULL,
   `id_usuario_inclusao_alteracao` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_empresa`),
@@ -62,13 +62,14 @@ ENGINE = InnoDB;
 -- Table `TBL_EMPR_ENDC`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_EMPR_ENDC` (
-  `id_endereco` VARCHAR(36) NOT NULL,
+  `id_endereco` CHAR(36) NOT NULL,
   `logradouro` VARCHAR(100) NOT NULL,
   `numero` VARCHAR(10) NOT NULL,
   `cep` VARCHAR(9) NOT NULL,
   `bairro` VARCHAR(50) NULL,
   `cidade` VARCHAR(100) NOT NULL,
   `pais` VARCHAR(50) NOT NULL,
+  `excluido` TINYINT NOT NULL,
   `id_empresa` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_endereco`),
   CONSTRAINT `fk_TBL_EMPR_ENDC_TBL_EMPRESA1`
@@ -97,7 +98,7 @@ ENGINE = InnoDB;
 -- Table `TBL_EMPREGADO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_EMPREGADO` (
-  `id_empregado` VARCHAR(36) NOT NULL,
+  `id_empregado` CHAR(36) NOT NULL,
   `num_seq_registro` INT NOT NULL,
   `emp_nome` VARCHAR(52) NOT NULL,
   `cpf` VARCHAR(14) NOT NULL,
@@ -112,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `TBL_EMPREGADO` (
   `cod_idef_caepf` VARCHAR(14) NULL,
   `cod_idef_cno` VARCHAR(12) NULL,
   `cod_matricula_esocial` VARCHAR(30) NULL,
+  `excluido` TINYINT NOT NULL,
   `id_empresa_endereco` VARCHAR(36) NOT NULL,
   `cod_horario_contratual` INT NOT NULL,
   `id_telefone` VARCHAR(36) NOT NULL,
@@ -174,7 +176,7 @@ ENGINE = InnoDB;
 -- Table `TBL_REGISTRO_PONTO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_REGISTRO_PONTO` (
-  `id_registro_ponto` VARCHAR(36) NOT NULL,
+  `id_registro_ponto` CHAR(36) NOT NULL,
   `num_seq_registro` INT NOT NULL,
   `num_seq_es_registro` INT NOT NULL COMMENT 'Número sequencial do par entrada/saída.',
   `data_marcacao_ponto` DATE NOT NULL,
@@ -220,7 +222,7 @@ ENGINE = InnoDB;
 -- Table `TBL_REGISTRO_FERIAS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_REGISTRO_FERIAS` (
-  `id_registro_ferias` VARCHAR(36) NOT NULL,
+  `id_registro_ferias` CHAR(36) NOT NULL,
   `data_inicio` DATETIME NULL,
   `data_fim` DATETIME NULL,
   `qtde_dias` INT NULL,
@@ -248,7 +250,7 @@ ENGINE = InnoDB;
 -- Table `TBL_EMPREGADO_REMUNERACAO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_EMPREGADO_REMUNERACAO` (
-  `id_emprg_remu` VARCHAR(36) NOT NULL,
+  `id_emprg_remu` CHAR(36) NOT NULL,
   `vigencia` VARCHAR(10) NOT NULL,
   `base` VARCHAR(45) NULL,
   `unidade` INT NULL,
@@ -284,7 +286,7 @@ ENGINE = InnoDB;
 -- Table `TBL_EMPREGADO_LICENCA`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_EMPREGADO_LICENCA` (
-  `id_emprg_licenca` VARCHAR(36) NOT NULL,
+  `id_emprg_licenca` CHAR(36) NOT NULL,
   `data_inicio` DATE NOT NULL,
   `data_fim` DATE NOT NULL,
   `id_empregado` VARCHAR(36) NOT NULL,
@@ -307,10 +309,10 @@ ENGINE = InnoDB;
 -- Table `TBL_HISTORICO_EMPREGADO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_HISTORICO_EMPREGADO` (
-  `id_historico_empregado` VARCHAR(36) NOT NULL,
+  `id_historico_empregado` CHAR(36) NOT NULL,
   `num_seq_registro` INT NOT NULL,
   `cpf_usuario_inclusao_alteracao` VARCHAR(12) NOT NULL,
-  `tipo_operacao` VARCHAR(1) NOT NULL COMMENT 'Tipo de operação: \n- \n\"I\": inclusão; \n- \n\"A\": alteração; \n- \n\"E\": exclusão.',
+  `tipo_operacao_inclusao_alteracao` VARCHAR(1) NOT NULL COMMENT 'Tipo de operação: \n\"I\": inclusão; \n\"A\": alteração; \n\"E\": exclusão.',
   `data_hora_inclusao_alteracao` DATETIME NOT NULL,
   `id_empregado` VARCHAR(36) NOT NULL,
   `id_usuario_inclusao_alteracao` VARCHAR(36) NOT NULL,
@@ -332,7 +334,7 @@ ENGINE = InnoDB;
 -- Table `TBL_INFO_PTRP`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_INFO_PTRP` (
-  `id_info_ptrp` VARCHAR(36) NOT NULL,
+  `id_info_ptrp` CHAR(36) NOT NULL,
   `nome_ptrp` VARCHAR(255) NULL,
   `versao_ptrp` VARCHAR(45) NULL,
   `tipo_idef_desenvolvedor` VARCHAR(1) NULL,
@@ -348,12 +350,12 @@ ENGINE = InnoDB;
 -- Table `TBL_REP_EVENTOS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_REP_EVENTOS` (
-  `id_rep_evento` VARCHAR(36) NOT NULL,
-  `num_seq_registros` INT NOT NULL,
+  `id_rep_evento` CHAR(36) NOT NULL,
+  `num_seq_registros` INT NOT NULL AUTO_INCREMENT,
   `data_hora_inclusao` DATETIME NOT NULL,
   `tipo_registro` VARCHAR(2) NOT NULL COMMENT 'Tipo de evento:\n\"02\": retorno de energia (REP-C ou REP-P); \n\n\"07\": disponibilidade de serviço (somente para REP-P); \n\n\"08\": indisponibilidade de serviço (somente para REP-P).',
   `id_info_ptrp` VARCHAR(36) NOT NULL,
-  PRIMARY KEY (`id_rep_evento`),
+  PRIMARY KEY (`num_seq_registros`, `id_rep_evento`),
   CONSTRAINT `fk_TBL_REP_EVENTOS_TBL_INFO_PTRP1`
     FOREIGN KEY (`id_info_ptrp`)
     REFERENCES `TBL_INFO_PTRP` (`id_info_ptrp`)
@@ -366,7 +368,7 @@ ENGINE = InnoDB;
 -- Table `TBL_BANCO_HORAS`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_BANCO_HORAS` (
-  `id_banco_horas` VARCHAR(36) NOT NULL,
+  `id_banco_horas` CHAR(36) NOT NULL,
   `tipo_ausencia_compensacao` VARCHAR(1) NOT NULL COMMENT 'Código com tipo da ausência ou compensação: \n\n- \"1\": Descanso Semanal Remunerado (DSR); \n\n- \"2\": falta não justificada; \n\n- \"3\": movimento no banco de horas; \n\n- \"4\": folga compensatória de feriado',
   `data_ausencia_compensacao` DATE NOT NULL,
   `quantidade_minutos` INT NOT NULL COMMENT 'Quantidade de minutos. Campo obrigatório se tipoAusenOuComp for igual a \"3\".',
