@@ -17,7 +17,7 @@ import java.util.UUID;
 public class TelefoneEntity {
 
     @Id
-    @Column(name = "id_telefone_emp")
+    @Column(name = "id_telefone")
     private String idTelefoneEmp;
 
     @Column(name = "telefone")

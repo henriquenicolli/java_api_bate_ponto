@@ -30,5 +30,6 @@ public class EmpregadoDTO {
     private int codHorarioContratual;
     private String idTelefone;
     private String idEmpresa;
+    private String idUsuarioInclusaoAlteracao;
 
 }

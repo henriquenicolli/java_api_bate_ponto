@@ -1,9 +1,18 @@
 package com.rep.app.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "TBL_HISTORICO_EMPREGADO")
 public class HistoricoEmpregadoEntity {
@@ -18,7 +27,7 @@ public class HistoricoEmpregadoEntity {
     @Column(name = "cpf_usuario_inclusao_alteracao")
     private String cpfUsuarioInclusaoAlteracao;
 
-    @Column(name = "tipo_operacao")
+    @Column(name = "tipo_operacao_inclusao_alteracao")
     private String tipoOperacao;
 
     @Column(name = "data_hora_inclusao_alteracao")
@@ -29,7 +38,12 @@ public class HistoricoEmpregadoEntity {
     private EmpregadoEntity empregado;
 
     @OneToOne
-    @JoinColumn(name = "id_usuario")
-    private UsuarioEntity idUsuarioInclusaoAlteracao;
+    @JoinColumn(name = "id_usuario_inclusao_alteracao")
+    private UsuarioEntity usuarioInclusaoAlteracao;
+
+    @PrePersist
+    public void generateId() {
+        idHistoricoEmpregado = UUID.randomUUID().toString();
+    }
 
 }

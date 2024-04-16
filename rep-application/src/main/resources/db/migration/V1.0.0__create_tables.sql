@@ -6,11 +6,11 @@
 -- Table `TBL_TELEFONE`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_TELEFONE` (
-  `id_telefone_emp` CHAR(36) NOT NULL,
+  `id_telefone` CHAR(36) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
   `cod_operadora` VARCHAR(2) NOT NULL,
   `whatsapp` TINYINT NOT NULL,
-  PRIMARY KEY (`id_telefone_emp`))
+  PRIMARY KEY (`id_telefone`))
 ENGINE = InnoDB;
 
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `TBL_EMPRESA` (
   PRIMARY KEY (`id_empresa`),
   CONSTRAINT `fk_TBL_EMPRESA_TBL_EMPR_TELF1`
     FOREIGN KEY (`id_telefone`)
-    REFERENCES `TBL_TELEFONE` (`id_telefone_emp`)
+    REFERENCES `TBL_TELEFONE` (`id_telefone`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_TBL_EMPRESA_TBL_USUARIO1`
@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `TBL_EMPREGADO` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_TBL_EMPREGADO_TBL_TELEFONE1`
     FOREIGN KEY (`id_telefone`)
-    REFERENCES `TBL_TELEFONE` (`id_telefone_emp`)
+    REFERENCES `TBL_TELEFONE` (`id_telefone`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
