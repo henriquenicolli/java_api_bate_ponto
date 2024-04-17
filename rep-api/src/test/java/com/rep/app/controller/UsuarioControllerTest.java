@@ -1,6 +1,8 @@
 package com.rep.app.controller;
 
+import com.rep.app.mapper.UsuarioRequestMapper;
 import com.rep.app.model.dto.UsuarioDTO;
+import com.rep.app.request.UsuarioRequest;
 import com.rep.app.services.UsuarioService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,14 +29,16 @@ public class UsuarioControllerTest {
 
     @Test
     public void testSalvaUsuario() {
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setUserLogin("testLogin");
-        usuarioDTO.setUserPassword("testPassword");
-        usuarioDTO.setUserEmail("testEmail");
+        UsuarioRequest usuarioRequest = new UsuarioRequest();
+        usuarioRequest.setLogin("testLogin");
+        usuarioRequest.setSenha("testPassword");
+        usuarioRequest.setEmail("testEmail");
+
+        UsuarioDTO usuarioDTO = UsuarioRequestMapper.INSTANCE.toDto(usuarioRequest);
 
         when(usuarioService.salvarUsuario(any(UsuarioDTO.class))).thenReturn(usuarioDTO);
 
-        ResponseEntity<UsuarioDTO> response = usuarioController.salvaUsuario(usuarioDTO);
+        ResponseEntity<UsuarioDTO> response = usuarioController.salvaUsuario(usuarioRequest);
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(usuarioDTO, response.getBody());
