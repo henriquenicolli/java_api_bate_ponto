@@ -1,7 +1,7 @@
 package com.rep.app.repository;
 
 import com.rep.app.entity.EmpregadoEntity;
-import com.rep.app.mapper.EmpregadoMapper;
+import com.rep.app.mapper.EmpregadoEntityMapper;
 import com.rep.app.model.dto.EmpregadoDTO;
 import com.rep.app.model.dto.HistoricoEmpregadoDTO;
 import com.rep.app.model.enums.TipoOperacaoInslucaoAlteracao;
@@ -32,13 +32,13 @@ public class EmpregadoRepositoryImpl implements EmpregadoRepository {
     public EmpregadoDTO salvarEmpregado(final EmpregadoDTO empregadoDTO) {
 
         try {
-            EmpregadoEntity empregadoEntity = EmpregadoMapper.INSTANCE.toEntity(empregadoDTO);
+            EmpregadoEntity empregadoEntity = EmpregadoEntityMapper.INSTANCE.toEntity(empregadoDTO);
 
             EmpregadoEntity empregadoSalvo = entityManager.merge(empregadoEntity);
 
             criaHistoricoEmpregado(empregadoSalvo, empregadoDTO.getIdUsuarioInclusaoAlteracao());
 
-            return EmpregadoMapper.INSTANCE.toDto(empregadoEntity);
+            return EmpregadoEntityMapper.INSTANCE.toDto(empregadoEntity);
 
         } catch (Exception e) {
             LOGGER.error("error while saving empregado", empregadoDTO, e);

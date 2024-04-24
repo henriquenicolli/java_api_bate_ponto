@@ -10,9 +10,9 @@ import java.util.List;
 @Data
 public class RegistroPontoAtualSnapshotDTO {
 
-    private List<RegistroPontoDTO> registroPontoHojeList = new ArrayList<>();
+    private List<OldRegistroPontoDTO> registroPontoHojeList = new ArrayList<>();
 
-    private List<RegistroPontoDTO> registroPontoOntemList = new ArrayList<>();
+    private List<OldRegistroPontoDTO> registroPontoOntemList = new ArrayList<>();
 
     private LocalTime horasTrabalhadasHoje = LocalTime.MIN;
 

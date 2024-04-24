@@ -7,14 +7,29 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.UUID;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @Getter
 @Setter
-@Entity(name = "TBL_REGISTRO_PONTO")
+@Entity
+@NamedQueries({
+        @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_MAX_NUMERO_SEQUENCIAL,
+                query = "SELECT COALESCE(MAX(rp.numSeqRegistro), 0) FROM RegistroPontoEntity rp"),
+
+        @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_MAX_ES_NUMERO_SEQUENCIAL,
+                query = "SELECT COALESCE(MAX(rp.numSeqEsRegistro), 0) FROM RegistroPontoEntity rp"),
+
+        @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_LAST_REGISTRO_PONMTO_ENTITY_BY_FUNCIONARIO,
+        query = "SELECT rp FROM RegistroPontoEntity rp WHERE rp.empregado.idEmpregado = :id_empregado ORDER BY rp.numSeqRegistro DESC")
+})
+@Table(name = "TBL_REGISTRO_PONTO")
 public class RegistroPontoEntity {
+
+    public static final String QUERY_FIND_MAX_NUMERO_SEQUENCIAL = "QUERY_FIND_MAX_NUMERO_SEQUENCIAL";
+    public static final String QUERY_FIND_MAX_ES_NUMERO_SEQUENCIAL = "QUERY_FIND_MAX_ES_NUMERO_SEQUENCIAL";
+    public static final String QUERY_FIND_LAST_REGISTRO_PONMTO_ENTITY_BY_FUNCIONARIO = "QUERY_FIND_LAST_REGISTRO_PONMTO_ENTITY_BY_FUNCIONARIO";
 
     @Id
     @Column(name = "id_registro_ponto")
@@ -74,5 +89,10 @@ public class RegistroPontoEntity {
     @ManyToOne
     @JoinColumn(name = "id_empregado")
     private EmpregadoEntity empregado;
+
+    @PrePersist
+    public void generateId() {
+        idRegistroPonto = UUID.randomUUID().toString();
+    }
 
 }

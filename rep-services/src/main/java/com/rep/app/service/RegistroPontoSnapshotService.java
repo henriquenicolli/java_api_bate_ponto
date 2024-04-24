@@ -2,7 +2,7 @@ package com.rep.app.service;
 
 import com.rep.app.entity.RegistroPontoEntity;
 import com.rep.app.model.dto.RegistroPontoAtualSnapshotDTO;
-import com.rep.app.model.dto.RegistroPontoDTO;
+import com.rep.app.model.dto.OldRegistroPontoDTO;
 //import com.rep.app.repository.RegistroPontoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Deprecated
 @Service
@@ -21,7 +20,7 @@ public class RegistroPontoSnapshotService {
     //private RegistroPontoRepository registroPontoRepository;
 
     @Autowired
-    private RegistroPontoService registroPontoService;
+    private OldRegistroPontoService oldRegistroPontoService;
 
     private static final LocalTime CARGA_HORARIA_DIARIA = LocalTime.of(7, 15);
 
@@ -62,7 +61,7 @@ public class RegistroPontoSnapshotService {
                 .toList();
     }
 
-    private void adicionaRegistroPonto(List<RegistroPontoEntity> registroPontoEntities, List<RegistroPontoDTO> registroPontoDTO) {
+    private void adicionaRegistroPonto(List<RegistroPontoEntity> registroPontoEntities, List<OldRegistroPontoDTO> oldRegistroPontoDTO) {
         // TODO FIX ME
         registroPontoEntities.forEach(entity -> {
             //final var registroPontoDto = RegistroPontoDTO.builder()
@@ -70,7 +69,7 @@ public class RegistroPontoSnapshotService {
                     //.tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
             //        .build();
 
-            registroPontoDTO.add(null);
+            oldRegistroPontoDTO.add(null);
         });
     }
 
@@ -86,7 +85,7 @@ public class RegistroPontoSnapshotService {
         //        ));
     }
 
-    private LocalTime calculaHorasTrabalhadas(List<RegistroPontoDTO> registroPontoList) {
+    private LocalTime calculaHorasTrabalhadas(List<OldRegistroPontoDTO> registroPontoList) {
         if (registroPontoList.isEmpty()) {
             return LocalTime.MIN;
         }

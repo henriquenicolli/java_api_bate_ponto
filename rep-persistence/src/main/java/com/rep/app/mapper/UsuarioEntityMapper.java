@@ -7,9 +7,9 @@ import org.mapstruct.factory.Mappers;
 
 
 @Mapper
-public interface UsuarioMapper {
+public interface UsuarioEntityMapper {
 
-    UsuarioMapper INSTANCE = Mappers.getMapper(UsuarioMapper.class);
+    UsuarioEntityMapper INSTANCE = Mappers.getMapper(UsuarioEntityMapper.class);
 
     @Mapping(target = "idUsuario", ignore = true)
     @Mapping(target = "userLogin", source = "userLogin")

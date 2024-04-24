@@ -1,7 +1,7 @@
 package com.rep.app.repository;
 
 import com.rep.app.entity.UsuarioEntity;
-import com.rep.app.mapper.UsuarioMapper;
+import com.rep.app.mapper.UsuarioEntityMapper;
 import com.rep.app.model.dto.UsuarioDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -23,11 +23,11 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     public UsuarioDTO salvarUsuario(final UsuarioDTO usuarioDTO) {
 
         try {
-            UsuarioEntity usuarioEntity = UsuarioMapper.INSTANCE.toEntity(usuarioDTO);
+            UsuarioEntity usuarioEntity = UsuarioEntityMapper.INSTANCE.toEntity(usuarioDTO);
 
             entityManager.merge(usuarioEntity);
 
-            return UsuarioMapper.INSTANCE.toDto(usuarioEntity);
+            return UsuarioEntityMapper.INSTANCE.toDto(usuarioEntity);
 
         } catch (Exception e) {
             LOGGER.error("error while saving user", usuarioDTO, e);

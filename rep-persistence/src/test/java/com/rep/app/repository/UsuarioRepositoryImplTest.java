@@ -1,7 +1,7 @@
 package com.rep.app.repository;
 
 import com.rep.app.entity.UsuarioEntity;
-import com.rep.app.mapper.UsuarioMapper;
+import com.rep.app.mapper.UsuarioEntityMapper;
 import com.rep.app.model.dto.UsuarioDTO;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +32,7 @@ public class UsuarioRepositoryImplTest {
         usuarioDTO.setUserPassword("testPassword");
         usuarioDTO.setUserEmail("testEmail");
 
-        UsuarioEntity usuarioEntity = UsuarioMapper.INSTANCE.toEntity(usuarioDTO);
+        UsuarioEntity usuarioEntity = UsuarioEntityMapper.INSTANCE.toEntity(usuarioDTO);
 
         when(entityManager.merge(any(UsuarioEntity.class))).thenReturn(usuarioEntity);
 

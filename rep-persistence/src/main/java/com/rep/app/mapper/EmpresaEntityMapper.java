@@ -7,9 +7,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface EmpresaMapper {
+public interface EmpresaEntityMapper {
 
-    EmpresaMapper INSTANCE = Mappers.getMapper(EmpresaMapper.class);
+    EmpresaEntityMapper INSTANCE = Mappers.getMapper(EmpresaEntityMapper.class);
 
     @Mapping(target = "idEmpresa", ignore = true)
     @Mapping(target = "nomeEmpresa", source = "nomeEmpresa")

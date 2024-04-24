@@ -1,4 +1,4 @@
-package com.rep.app.model.dto;
+package com.rep.app.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,10 +11,8 @@ import java.time.LocalTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistroPontoDTO {
+public class RegistroPontoRequest {
 
-    private int numSeqRegistro;
-    private int numSeqEsRegistro;
     private LocalDate dataMarcacaoPonto;
     private LocalTime horaMarcacaoPonto;
     private String fusoHorarioMarcacao;
@@ -27,6 +25,6 @@ public class RegistroPontoDTO {
     private Integer coletorRegistro;
     private String tipoMarcacao;
     private String fonteMarcacao;
-    private String empregado;
+    private String idEmpregado;
 
 }

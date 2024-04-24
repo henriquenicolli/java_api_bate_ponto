@@ -8,9 +8,9 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface EmpregadoMapper {
+public interface EmpregadoEntityMapper {
 
-    EmpregadoMapper INSTANCE = Mappers.getMapper(EmpregadoMapper.class);
+    EmpregadoEntityMapper INSTANCE = Mappers.getMapper(EmpregadoEntityMapper.class);
 
     @Mapping(target = "idEmpregado", ignore = true)
     @Mapping(target = "numSeqRegistro", source = "numSeqRegistro")

@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class UsuarioMapperTest {
 
-    private final UsuarioMapper mapper = UsuarioMapper.INSTANCE;
+    private final UsuarioEntityMapper mapper = UsuarioEntityMapper.INSTANCE;
 
     @Test
     public void testToEntity() {

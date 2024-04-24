@@ -1,7 +1,7 @@
 package com.rep.app.service;
 
 import com.rep.app.entity.RegistroPontoEntity;
-import com.rep.app.model.dto.RegistroPontoDTO;
+import com.rep.app.model.dto.OldRegistroPontoDTO;
 //import com.rep.app.repository.RegistroPontoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,14 +12,14 @@ import java.util.List;
 
 @Deprecated
 @Service
-public class RegistroPontoService {
+public class OldRegistroPontoService {
 
     //@Autowired
     //private RegistroPontoRepository registroPontoRepository;
 
-    private static final Logger logger = LoggerFactory.getLogger(RegistroPontoService.class);
+    private static final Logger logger = LoggerFactory.getLogger(OldRegistroPontoService.class);
 
-    public boolean registrarPonto(final RegistroPontoDTO registroPontoDTO) {
+    public boolean registrarPonto(final OldRegistroPontoDTO oldRegistroPontoDTO) {
         // TODO FIX ME
         //final var registroPontoEntity = RegistroPontoEntity.builder()
                 //mock funcionario
@@ -39,16 +39,16 @@ public class RegistroPontoService {
         return true;
     }
 
-    public List<RegistroPontoDTO> getEspelhoPontoMes(final int mes) {
-        List<RegistroPontoDTO> registroPontoDTOS = new ArrayList<>();
+    public List<OldRegistroPontoDTO> getEspelhoPontoMes(final int mes) {
+        List<OldRegistroPontoDTO> oldRegistroPontoDTOS = new ArrayList<>();
         //List<RegistroPontoEntity> entities = registroPontoRepository.findByMes(mes);
 
         //adicionaRegistroPonto(entities, registroPontoDTOS);
 
-        return registroPontoDTOS;
+        return oldRegistroPontoDTOS;
     }
 
-    private void adicionaRegistroPonto(List<RegistroPontoEntity> registroPontoEntities, List<RegistroPontoDTO> registroPontoDTO) {
+    private void adicionaRegistroPonto(List<RegistroPontoEntity> registroPontoEntities, List<OldRegistroPontoDTO> oldRegistroPontoDTO) {
         // TODO FIX ME
         registroPontoEntities.forEach(entity -> {
             //final var registroPontoDto = RegistroPontoDTO.builder()
@@ -56,7 +56,7 @@ public class RegistroPontoService {
                     //.tipoRegistro(TipoRegistro.fromCodigo(entity.getTipoRegistroPontoEntity().getIdTipoRegistroPonto()))
         //            .build();
 
-            registroPontoDTO.add(null);
+            oldRegistroPontoDTO.add(null);
         });
     }
 

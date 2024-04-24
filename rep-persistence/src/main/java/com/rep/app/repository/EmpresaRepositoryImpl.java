@@ -1,7 +1,7 @@
 package com.rep.app.repository;
 
 import com.rep.app.entity.EmpresaEntity;
-import com.rep.app.mapper.EmpresaMapper;
+import com.rep.app.mapper.EmpresaEntityMapper;
 import com.rep.app.model.dto.EmpresaDTO;
 import com.rep.app.model.enums.TipoOperacaoInslucaoAlteracao;
 import jakarta.persistence.EntityManager;
@@ -26,13 +26,13 @@ public class EmpresaRepositoryImpl implements EmpresaRepository {
     public EmpresaDTO salvarEmpresa(final EmpresaDTO empresaDTO) {
 
         try {
-            EmpresaEntity empresaEntity = EmpresaMapper.INSTANCE.toEntity(empresaDTO);
+            EmpresaEntity empresaEntity = EmpresaEntityMapper.INSTANCE.toEntity(empresaDTO);
             empresaEntity.setDataHoraInclusaoAlteracao(LocalDateTime.now());
             empresaEntity.setTipoOperacaoInclusaoAlteracao(TipoOperacaoInslucaoAlteracao.INCLUSAO);
 
             entityManager.merge(empresaEntity);
 
-            return EmpresaMapper.INSTANCE.toDto(empresaEntity);
+            return EmpresaEntityMapper.INSTANCE.toDto(empresaEntity);
 
         } catch (Exception e) {
             LOGGER.error("error while saving empresa", empresaDTO, e);

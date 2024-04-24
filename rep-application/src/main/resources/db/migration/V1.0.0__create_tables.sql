@@ -1,3 +1,4 @@
+
 -- -----------------------------------------------------
 -- Schema DB_REP
 -- -----------------------------------------------------
@@ -146,7 +147,7 @@ ENGINE = InnoDB;
 -- Table `TBL_TIPO_MARCACAO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_TIPO_MARCACAO` (
-  `cod_tipo_marcacao` INT NOT NULL COMMENT 'Tipo da marcação: \n\n- \"E\": marcação de entrada; \n\n- \"S\": marcação de saída; \n\n- \"D\": marcação desconsiderada.',
+  `cod_tipo_marcacao` VARCHAR(1) NOT NULL COMMENT 'Tipo da marcação: \n\n- \"E\": marcação de entrada; \n\n- \"S\": marcação de saída; \n\n- \"D\": marcação desconsiderada.',
   `descricao` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`cod_tipo_marcacao`))
 ENGINE = InnoDB;
@@ -166,7 +167,7 @@ ENGINE = InnoDB;
 -- Table `TBL_FONTE_MARCACAO`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TBL_FONTE_MARCACAO` (
-  `cod_fonte_marcacao` INT NOT NULL COMMENT 'Fonte da marcação: \n\n- \"O\": marcação original do REP; \n\n- \"I \": marcação incluída manualmente; \n\n- \"P\": marcação pré-assinalada; \n\n- \"X\": ponto por exceção; \n\n- \"T \": outras fontes de marcação.',
+  `cod_fonte_marcacao` VARCHAR(1) NOT NULL COMMENT 'Fonte da marcação: \n\n- \"O\": marcação original do REP; \n\n- \"I \": marcação incluída manualmente; \n\n- \"P\": marcação pré-assinalada; \n\n- \"X\": ponto por exceção; \n\n- \"T \": outras fontes de marcação.',
   `descricao` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`cod_fonte_marcacao`))
 ENGINE = InnoDB;
@@ -191,8 +192,8 @@ CREATE TABLE IF NOT EXISTS `TBL_REGISTRO_PONTO` (
   `longitude` DECIMAL(11,8) NULL,
   `motivo_marcacao` VARCHAR(150) NULL COMMENT 'Motivo da desconsideração ou inclusão da marcação. Campo obrigatório quando tpMarc for igual a \"D\" ou fonteMarc for igual a \"I\"',
   `cod_idef_coletor` INT NOT NULL,
-  `cod_tipo_marcao` INT NOT NULL,
-  `cod_fonte_marcacao` INT NOT NULL,
+  `cod_tipo_marcao` VARCHAR(1) NOT NULL,
+  `cod_fonte_marcacao` VARCHAR(1) NOT NULL,
   `id_empregado` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_registro_ponto`),
   CONSTRAINT `fk_TBL_REGISTRO_PONTO_TBL_FUNCIONARIO1`
@@ -381,3 +382,4 @@ CREATE TABLE IF NOT EXISTS `TBL_BANCO_HORAS` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+

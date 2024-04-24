@@ -1,7 +1,6 @@
 package com.rep.app.mapper;
 
 import com.rep.app.entity.EmpregadoEntity;
-import com.rep.app.entity.EmpresaEntity;
 import com.rep.app.entity.HistoricoEmpregadoEntity;
 import com.rep.app.entity.UsuarioEntity;
 import com.rep.app.model.dto.HistoricoEmpregadoDTO;
@@ -11,9 +10,9 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface HistoricoEmpregadoMapper {
+public interface HistoricoEmpregadoEntityMapper {
 
-    HistoricoEmpregadoMapper INSTANCE = Mappers.getMapper(HistoricoEmpregadoMapper.class);
+    HistoricoEmpregadoEntityMapper INSTANCE = Mappers.getMapper(HistoricoEmpregadoEntityMapper.class);
 
     //@Mapping(target = "idHistoricoEmpregado", source = "idHistoricoEmpregado")
     @Mapping(target = "numSeqRegistro", source = "numSeqRegistro")

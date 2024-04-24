@@ -1,7 +1,7 @@
 package com.rep.app.repository;
 
 import com.rep.app.entity.HistoricoEmpregadoEntity;
-import com.rep.app.mapper.HistoricoEmpregadoMapper;
+import com.rep.app.mapper.HistoricoEmpregadoEntityMapper;
 import com.rep.app.model.dto.HistoricoEmpregadoDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -18,11 +18,11 @@ public class HistoricoEmpregadoRepositoryImpl implements HistoricoEmpregadoRepos
     @Transactional
     public HistoricoEmpregadoDTO salvarHistoricoEmpregado(final HistoricoEmpregadoDTO historicoEmpregadoDTO) {
 
-        HistoricoEmpregadoEntity historicoEmpregadoEntity = HistoricoEmpregadoMapper.INSTANCE.toEntity(historicoEmpregadoDTO);
+        HistoricoEmpregadoEntity historicoEmpregadoEntity = HistoricoEmpregadoEntityMapper.INSTANCE.toEntity(historicoEmpregadoDTO);
 
         entityManager.merge(historicoEmpregadoEntity);
 
-        return HistoricoEmpregadoMapper.INSTANCE.toDto(historicoEmpregadoEntity);
+        return HistoricoEmpregadoEntityMapper.INSTANCE.toDto(historicoEmpregadoEntity);
 
     }
 }
