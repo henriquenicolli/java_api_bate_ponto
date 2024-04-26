@@ -39,10 +39,10 @@ public interface RegistroPontoEntityMapper {
     @Mapping(target = "latitude", source = "latitude")
     @Mapping(target = "longitude", source = "longitude")
     @Mapping(target = "motivoMarcacao", source = "motivoMarcacao")
-    @Mapping(target = "coletorRegistro", source = "coletorRegistro", ignore = true)
-    @Mapping(target = "tipoMarcacao", source = "tipoMarcacao", ignore = true)
-    @Mapping(target = "fonteMarcacao", source = "fonteMarcacao", ignore = true)
-    @Mapping(target = "empregado", source = "empregado", ignore = true)
+    @Mapping(target = "coletorRegistro", source = "coletorRegistro", qualifiedByName = "mapColetorRegistroToInteger")
+    @Mapping(target = "tipoMarcacao", source = "tipoMarcacao", qualifiedByName = "mapTipoMarcacaoToString")
+    @Mapping(target = "fonteMarcacao", source = "fonteMarcacao", qualifiedByName = "mapFonteMarcacaoToString")
+    @Mapping(target = "empregado", source = "empregado", qualifiedByName = "mapEmpregadoToString")
     RegistroPontoDTO toDto(RegistroPontoEntity registroPontoEntity);
 
     @Mapping(target = "dataMarcacaoPonto", source = "dataMarcacaoPonto")
@@ -54,11 +54,32 @@ public interface RegistroPontoEntityMapper {
     @Mapping(target = "latitude", source = "latitude")
     @Mapping(target = "longitude", source = "longitude")
     @Mapping(target = "motivoMarcacao", source = "motivoMarcacao")
-    @Mapping(target = "coletorRegistro", source = "coletorRegistro", ignore = true)
-    @Mapping(target = "tipoMarcacao", source = "tipoMarcacao", ignore = true)
-    @Mapping(target = "fonteMarcacao", source = "fonteMarcacao", ignore = true)
-    @Mapping(target = "empregado", source = "empregado", ignore = true)
+    @Mapping(target = "coletorRegistro", source = "coletorRegistro")
+    @Mapping(target = "tipoMarcacao", source = "tipoMarcacao")
+    @Mapping(target = "fonteMarcacao", source = "fonteMarcacao")
+    @Mapping(target = "empregado", source = "empregado")
     List<RegistroPontoDTO> toDto(List<RegistroPontoEntity> entities);
+
+
+    @Named("mapColetorRegistroToInteger")
+    default Integer mapColetorRegistroToInteger(ColetorRegistroEntity entity) {
+        return entity != null ? entity.getCodIdefColetorRegistro() : null;
+    }
+
+    @Named("mapTipoMarcacaoToString")
+    default String mapTipoMarcacaoToString(TipoMarcacaoEntity entity) {
+        return entity != null ? entity.getCodTipoMarcacao() : null;
+    }
+
+    @Named("mapFonteMarcacaoToString")
+    default String mapFonteMarcacaoToString(FonteMarcacaoEntity entity) {
+        return entity != null ? entity.getCodFonteMarcacao() : null;
+    }
+
+    @Named("mapEmpregadoToString")
+    default String mapEmpregadoToString(EmpregadoEntity entity) {
+        return entity != null ? entity.getIdEmpregado() : null;
+    }
 
     @Named("mapColetorRegistro")
     default ColetorRegistroEntity mapColetorRegistro(Integer value) {

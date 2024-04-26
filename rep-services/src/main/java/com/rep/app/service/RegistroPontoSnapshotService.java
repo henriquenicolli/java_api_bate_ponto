@@ -40,27 +40,14 @@ public class RegistroPontoSnapshotService {
         List<RegistroPontoDTO> pontosDeOntemList = filterRegistroPontoListByLocalDate(entities, LocalDate.now().minusDays(1));
         List<RegistroPontoDTO> pontoDeHojeList = filterRegistroPontoListByLocalDate(entities, LocalDate.now());
 
-        adicionaRegistroPonto(pontosDeOntemList, registroPontoAtualSnapshotDTO.getRegistroPontoOntemList());
-        adicionaRegistroPonto(pontoDeHojeList, registroPontoAtualSnapshotDTO.getRegistroPontoHojeList());
+        registroPontoAtualSnapshotDTO.getRegistroPontoOntemList().addAll(pontosDeOntemList);
+        registroPontoAtualSnapshotDTO.getRegistroPontoHojeList().addAll(pontoDeHojeList);
     }
 
     private List<RegistroPontoDTO> filterRegistroPontoListByLocalDate(List<RegistroPontoDTO> entities, LocalDate localDateTime) {
         return entities.stream()
                 .filter(entity -> entity.getDataMarcacaoPonto().equals(localDateTime))
                 .toList();
-    }
-
-    private void adicionaRegistroPonto(List<RegistroPontoDTO> registroPontoEntities, List<RegistroPontoDTO> registroPontoDTOS) {
-        registroPontoEntities.forEach(entity -> {
-            RegistroPontoDTO registroPontoDto = new RegistroPontoDTO();
-            registroPontoDto.setDataMarcacaoPonto(entity.getDataMarcacaoPonto());
-            registroPontoDto.setHoraMarcacaoPonto(entity.getHoraMarcacaoPonto());
-            registroPontoDto.setNumSeqRegistro(entity.getNumSeqRegistro());
-            registroPontoDto.setNumSeqEsRegistro(entity.getNumSeqEsRegistro());
-            registroPontoDto.setTipoMarcacao(entity.getTipoMarcacao());
-
-            registroPontoDTOS.add(registroPontoDto);
-        });
     }
 
     private void calculaHorasTrabalhasHoje(RegistroPontoAtualSnapshotDTO registroPontoAtualSnapshotDTO) {
