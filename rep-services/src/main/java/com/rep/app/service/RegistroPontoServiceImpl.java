@@ -6,6 +6,8 @@ import com.rep.app.services.RegistroPontoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RegistroPontoServiceImpl implements RegistroPontoService {
 
@@ -15,6 +17,10 @@ public class RegistroPontoServiceImpl implements RegistroPontoService {
     @Override
     public RegistroPontoDTO salvarRegistroPonto(final RegistroPontoDTO registroPontoDTO) {
         return registroPontoRepository.salvarRegistroPonto(registroPontoDTO);
+    }
+
+    public List<RegistroPontoDTO> findByMesMarcacaoPonto(int mes) {
+        return registroPontoRepository.findByMesMarcacaoPonto(mes);
     }
 
 }

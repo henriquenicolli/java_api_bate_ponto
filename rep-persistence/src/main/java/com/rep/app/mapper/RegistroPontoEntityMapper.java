@@ -7,6 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 
 @Mapper
 public interface RegistroPontoEntityMapper {
@@ -43,6 +45,20 @@ public interface RegistroPontoEntityMapper {
     @Mapping(target = "empregado", source = "empregado", ignore = true)
     RegistroPontoDTO toDto(RegistroPontoEntity registroPontoEntity);
 
+    @Mapping(target = "dataMarcacaoPonto", source = "dataMarcacaoPonto")
+    @Mapping(target = "horaMarcacaoPonto", source = "horaMarcacaoPonto")
+    @Mapping(target = "fusoHorarioMarcacao", source = "fusoHorarioMarcacao")
+    @Mapping(target = "fusoHorarioRegistro", source = "fusoHorarioRegistro")
+    @Mapping(target = "marcacaoOnline", source = "marcacaoOnline")
+    @Mapping(target = "cpfFuncionario", source = "cpfFuncionario")
+    @Mapping(target = "latitude", source = "latitude")
+    @Mapping(target = "longitude", source = "longitude")
+    @Mapping(target = "motivoMarcacao", source = "motivoMarcacao")
+    @Mapping(target = "coletorRegistro", source = "coletorRegistro", ignore = true)
+    @Mapping(target = "tipoMarcacao", source = "tipoMarcacao", ignore = true)
+    @Mapping(target = "fonteMarcacao", source = "fonteMarcacao", ignore = true)
+    @Mapping(target = "empregado", source = "empregado", ignore = true)
+    List<RegistroPontoDTO> toDto(List<RegistroPontoEntity> entities);
 
     @Named("mapColetorRegistro")
     default ColetorRegistroEntity mapColetorRegistro(Integer value) {

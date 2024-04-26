@@ -16,13 +16,19 @@ import java.util.UUID;
 @Entity
 @NamedQueries({
         @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_MAX_NUMERO_SEQUENCIAL,
-                query = "SELECT COALESCE(MAX(rp.numSeqRegistro), 0) FROM RegistroPontoEntity rp"),
+        query = "SELECT COALESCE(MAX(rp.numSeqRegistro), 0) FROM RegistroPontoEntity rp"),
 
         @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_MAX_ES_NUMERO_SEQUENCIAL,
-                query = "SELECT COALESCE(MAX(rp.numSeqEsRegistro), 0) FROM RegistroPontoEntity rp"),
+        query = "SELECT COALESCE(MAX(rp.numSeqEsRegistro), 0) FROM RegistroPontoEntity rp"),
 
         @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_LAST_REGISTRO_PONMTO_ENTITY_BY_FUNCIONARIO,
-        query = "SELECT rp FROM RegistroPontoEntity rp WHERE rp.empregado.idEmpregado = :id_empregado ORDER BY rp.numSeqRegistro DESC")
+        query = "SELECT rp FROM RegistroPontoEntity rp WHERE rp.empregado.idEmpregado = :id_empregado ORDER BY rp.numSeqRegistro DESC"),
+
+        @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_BY_DATA_INICIO_AND_DATA_FIM,
+        query = "SELECT rp FROM RegistroPontoEntity rp WHERE rp.dataMarcacaoPonto >= :dataInicio AND rp.dataMarcacaoPonto <= :dataFim"),
+
+        @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_BY_MES,
+        query = "SELECT rp FROM RegistroPontoEntity rp WHERE MONTH(rp.dataMarcacaoPonto) = :mes")
 })
 @Table(name = "TBL_REGISTRO_PONTO")
 public class RegistroPontoEntity {
@@ -30,6 +36,8 @@ public class RegistroPontoEntity {
     public static final String QUERY_FIND_MAX_NUMERO_SEQUENCIAL = "QUERY_FIND_MAX_NUMERO_SEQUENCIAL";
     public static final String QUERY_FIND_MAX_ES_NUMERO_SEQUENCIAL = "QUERY_FIND_MAX_ES_NUMERO_SEQUENCIAL";
     public static final String QUERY_FIND_LAST_REGISTRO_PONMTO_ENTITY_BY_FUNCIONARIO = "QUERY_FIND_LAST_REGISTRO_PONMTO_ENTITY_BY_FUNCIONARIO";
+    public static final String QUERY_FIND_BY_DATA_INICIO_AND_DATA_FIM = "QUERY_FIND_BY_DATA_INICIO_AND_DATA_FIM";
+    public static final String QUERY_FIND_BY_MES = "QUERY_FIND_BY_MES";
 
     @Id
     @Column(name = "id_registro_ponto")

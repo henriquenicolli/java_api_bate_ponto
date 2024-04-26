@@ -8,7 +8,9 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static com.rep.app.entity.RegistroPontoEntity.*;
 
@@ -20,12 +22,32 @@ public class RegistroPontoRepositoryImpl implements RegistroPontoRepository {
 
     @Override
     @Transactional
+    public List<RegistroPontoDTO> findByDataInicioAndDataFim(LocalDate dataInicio, LocalDate dataFim) {
+        List<RegistroPontoEntity> entities = entityManager.createNamedQuery(QUERY_FIND_BY_DATA_INICIO_AND_DATA_FIM, RegistroPontoEntity.class)
+                .setParameter("dataInicio", dataInicio)
+                .setParameter("dataFim", dataFim)
+                .getResultList();
+
+        return RegistroPontoEntityMapper.INSTANCE.toDto(entities);
+    }
+
+    @Override
+    @Transactional
+    public List<RegistroPontoDTO> findByMesMarcacaoPonto(int mesMarcacaoPonto) {
+        List<RegistroPontoEntity> entities = entityManager.createNamedQuery(QUERY_FIND_BY_MES, RegistroPontoEntity.class)
+                .setParameter("mes", mesMarcacaoPonto)
+                .getResultList();
+
+        return RegistroPontoEntityMapper.INSTANCE.toDto(entities);
+    }
+
+    @Override
+    @Transactional
     public RegistroPontoDTO salvarRegistroPonto(RegistroPontoDTO registroPontoDTO) {
 
         RegistroPontoEntity ultimoRegistro = consultarUltimoRegistro(registroPontoDTO.getEmpregado());
 
         int numeroSequencialEntradaSaida;
-        // todo enum
         if (ultimoRegistro == null || "S".equals(ultimoRegistro.getTipoMarcacao().getCodTipoMarcacao())) {
             // Se o último registro for uma SAIDA ou não houver registro anterior, este é um novo par
             numeroSequencialEntradaSaida = getNumeroSequencial(QUERY_FIND_MAX_ES_NUMERO_SEQUENCIAL) + 1;
