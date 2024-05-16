@@ -28,7 +28,7 @@ public class EmpregadoDTO {
     private String codMatriculaEsocial;
     private String idEmpresaEndereco;
     private int codHorarioContratual;
-    private String idTelefone;
+    private TelefoneDTO telefone;
     private String idEmpresa;
     private String idUsuarioInclusaoAlteracao;
 

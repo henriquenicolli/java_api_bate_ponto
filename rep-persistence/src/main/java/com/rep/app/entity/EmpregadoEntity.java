@@ -71,7 +71,7 @@ public class EmpregadoEntity {
     @JoinColumn(name = "cod_horario_contratual")
     private HorarioContratualEntity horarioContratual;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_telefone")
     private TelefoneEntity telefone;
 

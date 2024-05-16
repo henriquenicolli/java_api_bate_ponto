@@ -11,13 +11,13 @@ public interface TelefoneEntityMapper {
 
     TelefoneEntityMapper INSTANCE = Mappers.getMapper(TelefoneEntityMapper.class);
 
-    @Mapping(target = "idTelefoneEmp", source = "idTelefoneEmp")
+    @Mapping(target = "idTelefone", source = "idTelefone")
     @Mapping(target = "telefone", source = "telefone")
     @Mapping(target = "codOperadora", source = "codOperadora")
     @Mapping(target = "whatsapp", source = "whatsapp")
     TelefoneEntity toEntity(TelefoneDTO dto);
 
-    @Mapping(target = "idTelefoneEmp", source = "idTelefoneEmp")
+    @Mapping(target = "idTelefone", source = "idTelefone")
     @Mapping(target = "telefone", source = "telefone")
     @Mapping(target = "codOperadora", source = "codOperadora")
     @Mapping(target = "whatsapp", source = "whatsapp")

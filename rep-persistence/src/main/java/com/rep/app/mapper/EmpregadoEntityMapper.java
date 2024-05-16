@@ -2,10 +2,13 @@ package com.rep.app.mapper;
 
 import com.rep.app.entity.*;
 import com.rep.app.model.dto.EmpregadoDTO;
+import com.rep.app.model.dto.TelefoneDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper
 public interface EmpregadoEntityMapper {
@@ -27,7 +30,7 @@ public interface EmpregadoEntityMapper {
     @Mapping(target = "codIdefCaepf", source = "codIdefCaepf")
     @Mapping(target = "codIdefCno", source = "codIdefCno")
     @Mapping(target = "codMatriculaEsocial", source = "codMatriculaEsocial")
-    @Mapping(target = "telefone", source = "idTelefone", qualifiedByName = "mapTelefoneIdToEntity")
+    @Mapping(target = "telefone", source = "telefone", qualifiedByName = "mapTelefoneIdToEntity")
     @Mapping(target = "horarioContratual", source = "codHorarioContratual", qualifiedByName = "mapHorarioContratualToEntity")
     @Mapping(target = "enderecoEmpresa", source = "idEmpresaEndereco", qualifiedByName = "mapEmpresaEnderecoIdToEntity")
     @Mapping(target = "empresa", source = "idEmpresa", qualifiedByName = "mapEmpresaIdToEntity")
@@ -54,6 +57,23 @@ public interface EmpregadoEntityMapper {
     @Mapping(target = "idEmpresa", source = "idEmpresa")*/
     EmpregadoDTO toDto(EmpregadoEntity entity);
 
+    @Mapping(target = "idEmpregado", source = "idEmpregado")
+    @Mapping(target = "numSeqRegistro", source = "numSeqRegistro")
+    @Mapping(target = "empNome", source = "empNome")
+    @Mapping(target = "cpf", source = "cpf")
+    @Mapping(target = "dataAdmissao", source = "dataAdmissao")
+    @Mapping(target = "email", source = "email")
+    @Mapping(target = "departamento", source = "departamento")
+    @Mapping(target = "cargo", source = "cargo")
+    @Mapping(target = "banco", source = "banco")
+    @Mapping(target = "agencia", source = "agencia")
+    @Mapping(target = "conta", source = "conta")
+    @Mapping(target = "codIdefCtps", source = "codIdefCtps")
+    @Mapping(target = "codIdefCaepf", source = "codIdefCaepf")
+    @Mapping(target = "codIdefCno", source = "codIdefCno")
+    @Mapping(target = "codMatriculaEsocial", source = "codMatriculaEsocial")
+    List<EmpregadoDTO> toDtoList(List<EmpregadoEntity> entityList);
+
     @Named("mapEmpresaIdToEntity")
     default EmpresaEntity mapEmpresaIdToEntity(final String idEmpresa) {
         final EmpresaEntity empresa = new EmpresaEntity();
@@ -62,9 +82,11 @@ public interface EmpregadoEntityMapper {
     }
 
     @Named("mapTelefoneIdToEntity")
-    default TelefoneEntity mapTelefoneIdToEntity(final String idTelefone) {
+    default TelefoneEntity mapTelefoneIdToEntity(final TelefoneDTO telefoneDTO) {
         final TelefoneEntity telefone = new TelefoneEntity();
-        telefone.setIdTelefoneEmp(idTelefone);
+        telefone.setTelefone(telefoneDTO.getTelefone());
+        telefone.setCodOperadora(telefoneDTO.getCodOperadora());
+        telefone.setWhatsapp(telefoneDTO.isWhatsapp());
         return telefone;
     }
 

@@ -6,6 +6,8 @@ import com.rep.app.services.EmpregadoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmpregadoServiceImpl implements EmpregadoService {
 
@@ -15,6 +17,11 @@ public class EmpregadoServiceImpl implements EmpregadoService {
     @Override
     public EmpregadoDTO salvarEmpregado(EmpregadoDTO empregadoDTO) {
         return empregadoRepository.salvarEmpregado(empregadoDTO);
+    }
+
+    @Override
+    public List<EmpregadoDTO> buscarEmpregado(String idEmpresa) {
+        return empregadoRepository.buscarEmpregado(idEmpresa);
     }
 
 }

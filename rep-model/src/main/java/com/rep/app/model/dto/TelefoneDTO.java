@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 public class TelefoneDTO {
 
-    private String idTelefoneEmp;
+    private String idTelefone;
     private String telefone;
     private String codOperadora;
     private boolean whatsapp;

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/v1/rep/empregado")
@@ -24,6 +26,14 @@ public class EmpregadoController {
         LOGGER.info("inicio da chamada para salvar novo empregado");
 
         return ResponseEntity.ok(empregadoService.salvarEmpregado(empregadoDTO));
+    }
+
+    @GetMapping(value = "/buscar/{id_empresa}")
+    public ResponseEntity<List<EmpregadoDTO>> buscarEmpregado(@PathVariable String id_empresa) {
+
+        LOGGER.info("inicio da chamada para buscar empregado");
+
+        return ResponseEntity.ok(empregadoService.buscarEmpregado(id_empresa));
     }
 
 }

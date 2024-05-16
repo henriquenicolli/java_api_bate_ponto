@@ -18,7 +18,7 @@ public class TelefoneEntity {
 
     @Id
     @Column(name = "id_telefone")
-    private String idTelefoneEmp;
+    private String idTelefone;
 
     @Column(name = "telefone")
     private String telefone;
@@ -31,6 +31,6 @@ public class TelefoneEntity {
 
     @PrePersist
     public void generateId() {
-        idTelefoneEmp = UUID.randomUUID().toString();
+        idTelefone = UUID.randomUUID().toString();
     }
 }
