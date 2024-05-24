@@ -31,5 +31,7 @@ public class EmpregadoDTO {
     private TelefoneDTO telefone;
     private String idEmpresa;
     private String idUsuarioInclusaoAlteracao;
+    //todo status jornada mockado
+    private String statusJornada = "SEM_APONTAMENTO";
 
 }

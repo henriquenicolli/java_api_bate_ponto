@@ -19,8 +19,14 @@ public class RegistroPontoServiceImpl implements RegistroPontoService {
         return registroPontoRepository.salvarRegistroPonto(registroPontoDTO);
     }
 
+    @Override
     public List<RegistroPontoDTO> findByMesMarcacaoPonto(int mes) {
         return registroPontoRepository.findByMesMarcacaoPonto(mes);
+    }
+
+    @Override
+    public void updateRegistroPonto(RegistroPontoDTO registroAtualizado) {
+        registroPontoRepository.updateRegistroPonto(registroAtualizado);
     }
 
 }

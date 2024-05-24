@@ -51,16 +51,27 @@ public class RegistroPontoController {
         return ResponseEntity.ok(registroPontoAtualSnapshotDTO);
     }
 
-    @GetMapping(value = "/{mesSelecionado}")
-    public ResponseEntity<List<RegistroPontoDTO>> getRegistroPontoByMes(@PathVariable String mesSelecionado) {
+    @GetMapping
+    public ResponseEntity<List<RegistroPontoDTO>> getRegistroPontoByMes(@RequestParam String mes_selecionado,
+                                                                        @RequestParam String id_funcionario) {
 
-        LOGGER.info("get registros de ponto por mes");
+        LOGGER.info("get registros de ponto por mes " + mes_selecionado + " e id_funcionario " + id_funcionario);
 
-        List<RegistroPontoDTO> oldRegistroPontoDTOS = registroPontoService.findByMesMarcacaoPonto(DateUtil.sanitize(mesSelecionado));
-
-        System.out.println("sucesso " + oldRegistroPontoDTOS);
+        List<RegistroPontoDTO> oldRegistroPontoDTOS = registroPontoService.findByMesMarcacaoPonto(DateUtil.sanitize(mes_selecionado));
 
         return ResponseEntity.ok(oldRegistroPontoDTOS);
+    }
+
+    @PatchMapping(value = "/atualizar")
+    public ResponseEntity<String> updateHoraRegistroPonto(@RequestBody RegistroPontoRequest registroPontoRequest) {
+
+        LOGGER.info("update registro de ponto com " + registroPontoRequest);
+
+        final RegistroPontoDTO registroPontoDTO = RegistroPontoRequestMapper.INSTANCE.toDto(registroPontoRequest);
+
+        registroPontoService.updateRegistroPonto(registroPontoDTO);
+
+        return ResponseEntity.ok("Registro de ponto atualizado com sucesso");
     }
 
 }

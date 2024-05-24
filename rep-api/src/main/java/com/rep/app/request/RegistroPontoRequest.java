@@ -13,6 +13,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class RegistroPontoRequest {
 
+    private String numeroSequencialRegistro;
     private LocalDate dataMarcacaoPonto;
     private LocalTime horaMarcacaoPonto;
     private String fusoHorarioMarcacao;

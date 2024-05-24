@@ -11,6 +11,7 @@ public interface RegistroPontoRequestMapper {
 
     RegistroPontoRequestMapper INSTANCE = Mappers.getMapper(RegistroPontoRequestMapper.class);
 
+    @Mapping(target = "numSeqRegistro", source = "numeroSequencialRegistro")
     @Mapping(target = "dataMarcacaoPonto", source = "dataMarcacaoPonto")
     @Mapping(target = "horaMarcacaoPonto", source = "horaMarcacaoPonto")
     @Mapping(target = "fusoHorarioMarcacao", source = "fusoHorarioMarcacao")

@@ -10,4 +10,6 @@ public interface RegistroPontoService {
 
     List<RegistroPontoDTO> findByMesMarcacaoPonto(int mes);
 
+    void updateRegistroPonto(RegistroPontoDTO registroAtualizado);
+
 }

@@ -28,7 +28,10 @@ import java.util.UUID;
         query = "SELECT rp FROM RegistroPontoEntity rp WHERE rp.dataMarcacaoPonto >= :dataInicio AND rp.dataMarcacaoPonto <= :dataFim"),
 
         @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_BY_MES,
-        query = "SELECT rp FROM RegistroPontoEntity rp WHERE MONTH(rp.dataMarcacaoPonto) = :mes")
+        query = "SELECT rp FROM RegistroPontoEntity rp WHERE MONTH(rp.dataMarcacaoPonto) = :mes"),
+
+        @NamedQuery(name = RegistroPontoEntity.QUERY_FIND_BY_NUMERO_SEQUENCIAL,
+        query = "SELECT rp FROM RegistroPontoEntity rp WHERE rp.numSeqRegistro = :numeroSequencial")
 })
 @Table(name = "TBL_REGISTRO_PONTO")
 public class RegistroPontoEntity {
@@ -38,6 +41,7 @@ public class RegistroPontoEntity {
     public static final String QUERY_FIND_LAST_REGISTRO_PONMTO_ENTITY_BY_FUNCIONARIO = "QUERY_FIND_LAST_REGISTRO_PONMTO_ENTITY_BY_FUNCIONARIO";
     public static final String QUERY_FIND_BY_DATA_INICIO_AND_DATA_FIM = "QUERY_FIND_BY_DATA_INICIO_AND_DATA_FIM";
     public static final String QUERY_FIND_BY_MES = "QUERY_FIND_BY_MES";
+    public static final String QUERY_FIND_BY_NUMERO_SEQUENCIAL = "QUERY_FIND_BY_NUMERO_SEQUENCIAL";
 
     @Id
     @Column(name = "id_registro_ponto")

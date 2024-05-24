@@ -41,6 +41,27 @@ public class RegistroPontoRepositoryImpl implements RegistroPontoRepository {
         return RegistroPontoEntityMapper.INSTANCE.toDto(entities);
     }
 
+    public RegistroPontoEntity findByNumeroSequencial(int numeroSequencial) {
+        RegistroPontoEntity entity = entityManager.createNamedQuery(QUERY_FIND_BY_NUMERO_SEQUENCIAL, RegistroPontoEntity.class)
+                .setParameter("numeroSequencial", numeroSequencial)
+                .getSingleResult();
+
+        return entity;
+    }
+
+    @Override
+    @Transactional
+    public void updateRegistroPonto(RegistroPontoDTO registroAtualizado) {
+
+        RegistroPontoEntity entity = findByNumeroSequencial(registroAtualizado.getNumSeqRegistro());
+
+        //merge dados
+        entity.setDataMarcacaoPonto(registroAtualizado.getDataMarcacaoPonto());
+        entity.setHoraMarcacaoPonto(registroAtualizado.getHoraMarcacaoPonto());
+
+        entityManager.merge(entity);
+    }
+
     @Override
     @Transactional
     public RegistroPontoDTO salvarRegistroPonto(RegistroPontoDTO registroPontoDTO) {

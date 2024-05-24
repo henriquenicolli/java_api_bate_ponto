@@ -12,4 +12,6 @@ public interface RegistroPontoRepository {
     List<RegistroPontoDTO> findByDataInicioAndDataFim(LocalDate dataInicio, LocalDate dataFim);
 
     List<RegistroPontoDTO> findByMesMarcacaoPonto(int mesMarcacaoPonto);
+
+    void updateRegistroPonto(RegistroPontoDTO registroAtualizado);
 }
