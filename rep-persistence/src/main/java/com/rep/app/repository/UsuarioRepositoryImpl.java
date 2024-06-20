@@ -7,8 +7,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+
+import static com.rep.app.entity.UsuarioEntity.QUERY_FIND_USUARIO_BY_USERNAME;
 
 @Repository
 public class UsuarioRepositoryImpl implements UsuarioRepository {
@@ -23,7 +29,10 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     public UsuarioDTO salvarUsuario(final UsuarioDTO usuarioDTO) {
 
         try {
-            UsuarioEntity usuarioEntity = UsuarioEntityMapper.INSTANCE.toEntity(usuarioDTO);
+            final UsuarioEntity usuarioEntity = UsuarioEntityMapper.INSTANCE.toEntity(usuarioDTO);
+
+            final String hashedPassword = BCrypt.hashpw(usuarioDTO.getUserPassword(), BCrypt.gensalt());
+            usuarioEntity.setUserPassword(hashedPassword);
 
             entityManager.merge(usuarioEntity);
 
@@ -33,5 +42,15 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
             LOGGER.error("error while saving user", usuarioDTO, e);
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    @Transactional
+    public User findByUsername(final String username) {
+        UsuarioEntity usuarioEntity = entityManager.createNamedQuery(QUERY_FIND_USUARIO_BY_USERNAME, UsuarioEntity.class)
+                .setParameter("username", username)
+                .getSingleResult();
+
+        return new User(usuarioEntity.getUserLogin(), usuarioEntity.getUserPassword(), new ArrayList<>());
     }
 }

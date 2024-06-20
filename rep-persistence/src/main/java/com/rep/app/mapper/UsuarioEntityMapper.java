@@ -13,7 +13,6 @@ public interface UsuarioEntityMapper {
 
     @Mapping(target = "idUsuario", ignore = true)
     @Mapping(target = "userLogin", source = "userLogin")
-    @Mapping(target = "userPassword", source = "userPassword")
     @Mapping(target = "userEmail", source = "userEmail")
     UsuarioEntity toEntity(UsuarioDTO dto);
 

@@ -4,6 +4,7 @@ import com.rep.app.entity.*;
 import com.rep.app.model.dto.RegistroPontoDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
@@ -59,6 +60,12 @@ public interface RegistroPontoEntityMapper {
     @Mapping(target = "fonteMarcacao", source = "fonteMarcacao")
     @Mapping(target = "empregado", source = "empregado")
     List<RegistroPontoDTO> toDto(List<RegistroPontoEntity> entities);
+
+    @Mapping(target = "coletorRegistro", source = "coletorRegistro", qualifiedByName = "mapColetorRegistro")
+    @Mapping(target = "tipoMarcacao", source = "tipoMarcacao", qualifiedByName = "mapTipoMarcacao")
+    @Mapping(target = "fonteMarcacao", source = "fonteMarcacao", qualifiedByName = "mapFonteMarcacao")
+    @Mapping(target = "empregado", source = "empregado", qualifiedByName = "mapEmpregado")
+    void updateEntityFromDto(RegistroPontoDTO dto, @MappingTarget RegistroPontoEntity entity);
 
 
     @Named("mapColetorRegistroToInteger")

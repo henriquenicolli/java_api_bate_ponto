@@ -14,7 +14,13 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "TBL_USUARIO")
+@NamedQueries({
+        @NamedQuery(name = UsuarioEntity.QUERY_FIND_USUARIO_BY_USERNAME,
+                query = "SELECT u FROM UsuarioEntity u WHERE u.userLogin = :username")
+})
 public class UsuarioEntity {
+
+    public static final String QUERY_FIND_USUARIO_BY_USERNAME = "QUERY_FIND_USUARIO_BY_USERNAME";
 
     @Id
     @Column(name = "id_usuario", updatable = false, nullable = false)

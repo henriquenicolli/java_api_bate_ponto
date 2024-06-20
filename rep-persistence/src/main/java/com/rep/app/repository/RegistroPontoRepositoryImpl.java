@@ -55,9 +55,7 @@ public class RegistroPontoRepositoryImpl implements RegistroPontoRepository {
 
         RegistroPontoEntity entity = findByNumeroSequencial(registroAtualizado.getNumSeqRegistro());
 
-        //merge dados
-        entity.setDataMarcacaoPonto(registroAtualizado.getDataMarcacaoPonto());
-        entity.setHoraMarcacaoPonto(registroAtualizado.getHoraMarcacaoPonto());
+        RegistroPontoEntityMapper.INSTANCE.updateEntityFromDto(registroAtualizado, entity);
 
         entityManager.merge(entity);
     }
