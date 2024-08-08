@@ -1,7 +1,8 @@
 package com.rep.app.repository;
 
-import com.rep.app.entity.RegistroPontoEntity;
+import com.rep.app.mapper.RegistroPontoAlteradoEntityMapper;
 import com.rep.app.mapper.RegistroPontoEntityMapper;
+import com.rep.app.entity.RegistroPontoEntity;
 import com.rep.app.model.dto.RegistroPontoDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -55,7 +56,9 @@ public class RegistroPontoRepositoryImpl implements RegistroPontoRepository {
 
         RegistroPontoEntity entity = findByNumeroSequencial(registroAtualizado.getNumSeqRegistro());
 
-        RegistroPontoEntityMapper.INSTANCE.updateEntityFromDto(registroAtualizado, entity);
+        entity.setHoraMarcacaoPontoOriginal(entity.getHoraMarcacaoPonto());
+
+        RegistroPontoAlteradoEntityMapper.INSTANCE.updateEntityFromDto(registroAtualizado, entity);
 
         entityManager.merge(entity);
     }

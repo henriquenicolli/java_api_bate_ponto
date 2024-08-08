@@ -1,7 +1,7 @@
 package com.rep.app.mapper;
 
-import com.rep.app.entity.EmpregadoEntity;
 import com.rep.app.entity.HistoricoEmpregadoEntity;
+import com.rep.app.entity.EmpregadoEntity;
 import com.rep.app.entity.UsuarioEntity;
 import com.rep.app.model.dto.HistoricoEmpregadoDTO;
 import org.mapstruct.Mapper;

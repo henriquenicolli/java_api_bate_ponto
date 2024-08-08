@@ -1,4 +1,3 @@
-
 -- -----------------------------------------------------
 -- Schema DB_REP
 -- -----------------------------------------------------
@@ -195,6 +194,9 @@ CREATE TABLE IF NOT EXISTS `TBL_REGISTRO_PONTO` (
   `cod_tipo_marcao` VARCHAR(1) NOT NULL,
   `cod_fonte_marcacao` VARCHAR(1) NOT NULL,
   `id_empregado` VARCHAR(36) NOT NULL,
+  `registro_alterado` TINYINT NULL,
+  `registro_alterado_aprovacao` TINYINT NULL,
+  `hora_marcacao_ponto_original` TIME NULL,
   PRIMARY KEY (`id_registro_ponto`),
   CONSTRAINT `fk_TBL_REGISTRO_PONTO_TBL_FUNCIONARIO1`
     FOREIGN KEY (`id_empregado`)

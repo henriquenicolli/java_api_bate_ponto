@@ -27,5 +27,8 @@ public class RegistroPontoRequest {
     private String tipoMarcacao;
     private String fonteMarcacao;
     private String idEmpregado;
+    private Boolean registroAlterado;
+    private Boolean registroAlteradoAprovacao;
+    private LocalTime horaMarcacaoPontoOriginal;
 
 }

@@ -102,6 +102,15 @@ public class RegistroPontoEntity {
     @JoinColumn(name = "id_empregado")
     private EmpregadoEntity empregado;
 
+    @Column(name = "registro_alterado")
+    private Boolean registroAlterado;
+
+    @Column(name = "registro_alterado_aprovacao")
+    private Boolean registroAlteradoAprovacao;
+
+    @Column(name = "hora_marcacao_ponto_original")
+    private LocalTime horaMarcacaoPontoOriginal;
+
     @PrePersist
     public void generateId() {
         idRegistroPonto = UUID.randomUUID().toString();

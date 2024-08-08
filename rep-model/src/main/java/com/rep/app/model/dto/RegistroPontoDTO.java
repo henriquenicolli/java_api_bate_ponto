@@ -28,5 +28,8 @@ public class RegistroPontoDTO {
     private String tipoMarcacao;
     private String fonteMarcacao;
     private String empregado;
+    private Boolean registroAlterado;
+    private Boolean registroAlteradoAprovacao;
+    private LocalTime horaMarcacaoPontoOriginal;
 
 }

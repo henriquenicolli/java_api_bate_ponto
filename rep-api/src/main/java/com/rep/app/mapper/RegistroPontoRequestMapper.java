@@ -25,6 +25,9 @@ public interface RegistroPontoRequestMapper {
     @Mapping(target = "tipoMarcacao", source = "tipoMarcacao")
     @Mapping(target = "fonteMarcacao", source = "fonteMarcacao")
     @Mapping(target = "empregado", source = "idEmpregado")
+    @Mapping(target = "registroAlterado", source = "registroAlterado")
+    @Mapping(target = "registroAlteradoAprovacao", source = "registroAlteradoAprovacao")
+    @Mapping(target = "horaMarcacaoPontoOriginal", source = "horaMarcacaoPontoOriginal")
     RegistroPontoDTO toDto(RegistroPontoRequest request);
 
 }

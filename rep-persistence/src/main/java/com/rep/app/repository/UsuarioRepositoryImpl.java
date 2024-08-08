@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
-import static com.rep.app.entity.UsuarioEntity.QUERY_FIND_USUARIO_BY_USERNAME;
-
 @Repository
 public class UsuarioRepositoryImpl implements UsuarioRepository {
 
@@ -47,7 +45,7 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     @Override
     @Transactional
     public User findByUsername(final String username) {
-        UsuarioEntity usuarioEntity = entityManager.createNamedQuery(QUERY_FIND_USUARIO_BY_USERNAME, UsuarioEntity.class)
+        UsuarioEntity usuarioEntity = entityManager.createNamedQuery(UsuarioEntity.QUERY_FIND_USUARIO_BY_USERNAME, UsuarioEntity.class)
                 .setParameter("username", username)
                 .getSingleResult();
 
