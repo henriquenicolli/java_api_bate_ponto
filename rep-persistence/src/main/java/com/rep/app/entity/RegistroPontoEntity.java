@@ -111,6 +111,12 @@ public class RegistroPontoEntity {
     @Column(name = "hora_marcacao_ponto_original")
     private LocalTime horaMarcacaoPontoOriginal;
 
+    @Column(name = "excluido")
+    private boolean excluido;
+
+    @Column(name = "registro_excluido_aprovacao")
+    private boolean registroExcluidoAprovacao;
+
     @PrePersist
     public void generateId() {
         idRegistroPonto = UUID.randomUUID().toString();

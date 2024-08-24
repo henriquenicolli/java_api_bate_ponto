@@ -74,4 +74,14 @@ public class RegistroPontoController {
         return ResponseEntity.ok("Registro de ponto atualizado com sucesso");
     }
 
+    @DeleteMapping(value = "/deletar")
+    public ResponseEntity<String> deleteRegistroPonto(@RequestParam String numero_sequencial_registro) {
+
+        LOGGER.info("delete registro de ponto com numSeqRegistro " + numero_sequencial_registro);
+
+        registroPontoService.deleteRegistroPonto(Integer.parseInt(numero_sequencial_registro));
+
+        return ResponseEntity.ok("Registro de ponto deletado com sucesso");
+    }
+
 }

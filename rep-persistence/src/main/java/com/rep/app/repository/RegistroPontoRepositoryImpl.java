@@ -43,7 +43,7 @@ public class RegistroPontoRepositoryImpl implements RegistroPontoRepository {
     }
 
     public RegistroPontoEntity findByNumeroSequencial(int numeroSequencial) {
-        RegistroPontoEntity entity = entityManager.createNamedQuery(QUERY_FIND_BY_NUMERO_SEQUENCIAL, RegistroPontoEntity.class)
+        final RegistroPontoEntity entity = entityManager.createNamedQuery(QUERY_FIND_BY_NUMERO_SEQUENCIAL, RegistroPontoEntity.class)
                 .setParameter("numeroSequencial", numeroSequencial)
                 .getSingleResult();
 
@@ -60,6 +60,14 @@ public class RegistroPontoRepositoryImpl implements RegistroPontoRepository {
 
         RegistroPontoAlteradoEntityMapper.INSTANCE.updateEntityFromDto(registroAtualizado, entity);
 
+        entityManager.merge(entity);
+    }
+
+    @Override
+    @Transactional
+    public void deleteRegistroPonto(int numSeqRegistro) {
+        RegistroPontoEntity entity = findByNumeroSequencial(numSeqRegistro);
+        entity.setExcluido(true);
         entityManager.merge(entity);
     }
 

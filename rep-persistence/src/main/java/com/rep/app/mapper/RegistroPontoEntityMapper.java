@@ -28,6 +28,10 @@ public interface RegistroPontoEntityMapper {
     @Mapping(target = "tipoMarcacao", source = "tipoMarcacao", qualifiedByName = "mapTipoMarcacao")
     @Mapping(target = "fonteMarcacao", source = "fonteMarcacao", qualifiedByName = "mapFonteMarcacao")
     @Mapping(target = "empregado", source = "empregado", qualifiedByName = "mapEmpregado")
+    @Mapping(target = "registroAlterado", defaultValue = "0")
+    @Mapping(target = "registroAlteradoAprovacao", defaultValue = "0")
+    @Mapping(target = "excluido", defaultValue = "0")
+    @Mapping(target = "registroExcluidoAprovacao", defaultValue = "0")
     RegistroPontoEntity toEntity(RegistroPontoDTO dto);
 
     @Mapping(target = "dataMarcacaoPonto", source = "dataMarcacaoPonto")

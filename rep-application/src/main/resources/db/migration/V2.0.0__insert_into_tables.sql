@@ -16,7 +16,7 @@ INSERT INTO TBL_FONTE_MARCACAO (cod_fonte_marcacao, descricao) VALUES
 ('P', 'marcação pré-assinalada');
 
 INSERT INTO DB_REP.TBL_USUARIO (id_usuario, user_login, user_password, user_email) VALUES
-('c54fcea1-b172-4c7c-8df4-fee205c0e97d', 'biondo', '12345', 'usuarioExemplo@email.com');
+('c54fcea1-b172-4c7c-8df4-fee205c0e97d', 'biondo', '$2y$10$DZVsSf7mQMOMMrTxvXveb.8/owEF91UZnsoxvusFujFK0F0idHy/y', 'usuarioExemplo@email.com');
 
 INSERT INTO DB_REP.TBL_TELEFONE (id_telefone, telefone, cod_operadora, whatsapp) VALUES
 ('594beb80-619c-4a5d-bac4-39eaae7c08ef', '99630-9395', '43', 1);

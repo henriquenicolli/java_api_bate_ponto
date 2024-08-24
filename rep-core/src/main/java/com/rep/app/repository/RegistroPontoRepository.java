@@ -14,4 +14,6 @@ public interface RegistroPontoRepository {
     List<RegistroPontoDTO> findByMesMarcacaoPonto(int mesMarcacaoPonto);
 
     void updateRegistroPonto(RegistroPontoDTO registroAtualizado);
+
+    void deleteRegistroPonto(int numSeqRegistro);
 }

@@ -29,4 +29,9 @@ public class RegistroPontoServiceImpl implements RegistroPontoService {
         registroPontoRepository.updateRegistroPonto(registroAtualizado);
     }
 
+    @Override
+    public void deleteRegistroPonto(int numSeqRegistro) {
+        registroPontoRepository.deleteRegistroPonto(numSeqRegistro);
+    }
+
 }

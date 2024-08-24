@@ -12,4 +12,6 @@ public interface RegistroPontoService {
 
     void updateRegistroPonto(RegistroPontoDTO registroAtualizado);
 
+    void deleteRegistroPonto(int numSeqRegistro);
+
 }

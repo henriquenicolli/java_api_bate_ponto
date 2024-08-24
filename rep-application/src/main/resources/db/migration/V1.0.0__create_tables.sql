@@ -20,7 +20,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `TBL_USUARIO` (
   `id_usuario` CHAR(36) NOT NULL,
   `user_login` VARCHAR(45) NOT NULL,
-  `user_password` VARCHAR(45) NOT NULL,
+  `user_password` VARCHAR(255) NOT NULL,
   `user_email` VARCHAR(45) NULL,
   PRIMARY KEY (`id_usuario`))
 ENGINE = InnoDB;
@@ -194,9 +194,11 @@ CREATE TABLE IF NOT EXISTS `TBL_REGISTRO_PONTO` (
   `cod_tipo_marcao` VARCHAR(1) NOT NULL,
   `cod_fonte_marcacao` VARCHAR(1) NOT NULL,
   `id_empregado` VARCHAR(36) NOT NULL,
-  `registro_alterado` TINYINT NULL,
-  `registro_alterado_aprovacao` TINYINT NULL,
+  `registro_alterado` TINYINT NOT NULL,
+  `registro_alterado_aprovacao` TINYINT NOT NULL,
   `hora_marcacao_ponto_original` TIME NULL,
+  `excluido` TINYINT NOT NULL,
+  `registro_excluido_aprovacao` TINYINT NOT NULL,
   PRIMARY KEY (`id_registro_ponto`),
   CONSTRAINT `fk_TBL_REGISTRO_PONTO_TBL_FUNCIONARIO1`
     FOREIGN KEY (`id_empregado`)
@@ -384,4 +386,3 @@ CREATE TABLE IF NOT EXISTS `TBL_BANCO_HORAS` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
