@@ -1,7 +1,0 @@
-INSERT INTO DB_BATE_PONTO.TBL_TIPO_REGISTRO_PONTO
-(id_tipo_registro_ponto, descricao)
-VALUES(1, 'ENTRADA');
-
-INSERT INTO DB_BATE_PONTO.TBL_TIPO_REGISTRO_PONTO
-(id_tipo_registro_ponto, descricao)
-VALUES(2, 'SAIDA');

@@ -1,34 +1,18 @@
 # FUNCIONALIDADES DA API
 
-### Visao funcionario
-1. Registrar o ponto de um funcionario [ ]
-2. Recuperar espelho de ponto de um funcionario [ ]
-3. Recuperar um snapshot dos ultimos registros de pontos [ ]
-4. Ser capaz de calcular as horas trabalhadas em um determinado dia [ ]
-5. Ser capaz de calcular as horas extras totais do mes [ ]
-6. Ser capaz de calcular as horas extras do dia de trabalho [ ]
-7. Recuperar as ferias cadastradas de um funcionario [ ]
-8. Recuperar as informacoes de remuneracao de um funcionario[ ]
-9. Gerar o informe de rendimentos de um funcionario [ ]
-10. Gerar o demonstrativo de pagamento de um funcionario [ ]
-11. Recuperar as licencas cadastradas de um funcionario [ ] 
-    
+ARQUIVO FONTE DE DADOS - AFD - Arquivo Fonte de Dados deve ser prontamente gerado e
+entregue, quando solicitado pelo Auditor-Fiscal do Trabalho. Deve ser assinado eletronicamente
 
-### Visao empresa
+- Padrao nome AFD: "CNPJ"REP_P
 
-1. gestao funcionario
-   - Cadastrar um funcionario [ ]
-   - Cadastrar remuneracao de um funcionario [ ]
-   - Cadastrar ferias de um funcionario [ ]
-   - Cadastrar licenca de um funcionario [ ]
-   - Gerir documentos de um funcionario [ ]
+ARQUIVO ELETRÔNICO DE JORNADA - AEJ
 
-2. relatorios
-   - Gerar relatorio com dados de localizacao e horario de ponto de um funcionario [ ]
-   - Gerar holerite de um funcionario [ ]
-   - Gerar informacoes de ferias de um funcionario [ ]
-   - Gerar informacoes de licencas de um funcionario [ ]
-   - gerar relatorio de jornada de trabalho de um funcionario [ ]
+ARMAZENAMENTO DE REGISTRO DE PONTO - ARP
+
+
+** CEI - Cadastro Específico do INSS
+** CNO - Cadastro Nacional de Obras
+** CAEPF - Cadastro de Atividade Econômica da Pessoa Física
 
 
 ***
@@ -61,10 +45,10 @@ Art. 79. O REP-C e o REP-P, definidos no art. 76 e no art. 78, devem emitir ou d
 
   3. identificação do empregador contendo nome, CNPJ/CPF e CEI/CAEPF/CNO, caso exista;
 
-  4.  local da prestação do serviço ou endereço do estabelecimento ao qual o empregado esteja
+  4. local da prestação do serviço ou endereço do estabelecimento ao qual o empregado esteja
       vinculado, quando exercer atividade externa ou em instalações de terceiros;
 
-  5.  identificação do trabalhador contendo nome e CPF;
+  5. identificação do trabalhador contendo nome e CPF;
 
 
   6. data e horário do respectivo registro;
@@ -119,7 +103,7 @@ relatório Espelho de Ponto Eletrônico, conforme art. 84.
 Art 84.  O relatório Espelho de Ponto Eletrônico gerado pelo programa de tratamento de registro
 de ponto deve conter, no mínimo, as seguintes informações:
 
-  1.  identificação do empregador contendo nome, CNPJ/CPF e CEI/CAEPF/CNO, caso exista;
+  1. identificação do empregador contendo nome, CNPJ/CPF e CEI/CAEPF/CNO, caso exista;
 
   2. identificação do trabalhador contendo nome, CPF, data de admissão e cargo/função;
 
@@ -127,7 +111,7 @@ de ponto deve conter, no mínimo, as seguintes informações:
 
   4. horário e jornada contratual do empregado;
 
-  5. marcações efetuadas no REP e marcações tratadas (incluídas, desconsideradas e préassinaladas) no Programa de Tratamento de Registro de Ponto; e
+  5. marcações efetuadas no REP e marcações tratadas (incluídas, desconsideradas e pré-assinaladas) no Programa de Tratamento de Registro de Ponto; e
 
   6. duração das jornadas realizadas (considerando o horário noturno reduzido, se for o caso).
 
@@ -199,11 +183,11 @@ REQUISITOS DO REGISTRADOR ELETRÔNICO DE PONTOVIA PROGRAMA - REP-P
 O REP-P deve apresentar os seguintes requisitos:
 
 1. Permitir a identificação da organização e do trabalhador.
+   
 2. Possuir ou acessar relógio que mantenha sincronismo com a Hora Legal Brasileira (HLB)
    disseminada pelo Observatório Nacional (ON), com uma variação de no máximo 30 (trinta) segundos.
 
 3. Todo coletor de marcação de registro de ponto conectado ao REP-P deve exibir relógio não-analógico contendo horas, minutos e segundos no momento da marcação
-
 
 4. As marcações registradas realizadas no REP-P devem ser oriundas de coletor on-line
 (conectado ao REP-P), podendo excepcionalmente estar off-line (não conectado ao REP-P).
@@ -233,7 +217,7 @@ O REP-P deve apresentar os seguintes requisitos:
 
    d) eventos sensíveis do REP, considerando seus respectivos códigos; e
 
-   e)marcação de ponto, armazenando número do CPF, data e hora da marcação, fuso horário da
+   e) marcação de ponto, armazenando número do CPF, data e hora da marcação, fuso horário da
    marcação, data e hora da gravação do registro, fuso horário da gravação do registro, identificador do
    coletor e código hash (SHA-256)
 
@@ -253,7 +237,7 @@ indiretamente, pelo prazo mínimo legal.
 
    b) obter a data e a hora de registro do ponto de forma confiável;
 
-   c) registrar a marcação de ponto na ARP; e
+   c) registrar a marcação de ponto na ARP(Armazenamento de Registro de Ponto)); e
 
    d) disponibilizar Comprovante de Registro de Ponto do Trabalhador conforme arts. 8º e 9º
 
@@ -263,11 +247,11 @@ densidade horizontal máxima de oito caracteres por centímetro e o caractere n�
 a três milímetros.
 
 
-10. O registro da marcação de ponto gravada na ARP consistirá dos seguintes campos:
+10. O registro da marcação de ponto gravada na ARP(Armazenamento de Registro de Ponto) consistirá dos seguintes campos:
 
-       a) NSR
+       a) NSR (numero sequencia registro)
     
-       b)  CPF do Trabalhador;
+       b) CPF do Trabalhador;
     
        c) data da marcação
     
@@ -277,12 +261,16 @@ a três milímetros.
     
        f) horário da gravação do registro, composto de hora, minutos e fuso horário
     
-       g) identificação do coletor; e
+       g) identificação do coletor; e (Identificador do coletor da marcação: "01": aplicativomobile;
+"02":browser(navegador internet); "03": aplicativodesktop; "04":
+dispositivo eletrônico; "05": outro dispositivo eletrônico não
+especificado acima.
+)
     
        h) código hash (SHA-256).
 
 
-11. Gerar o Arquivo Fonte de Dados - AFD, a partir dos dados armazenados na ARP, em
+11. Gerar o Arquivo Fonte de Dados - AFD, a partir dos dados armazenados na ARP(Armazenamento de Registro de Ponto), em
 conformidade com o Anexo I desta Portaria
 
 12. Possibilitar a geração do AFD para um determinado intervalo temporal.

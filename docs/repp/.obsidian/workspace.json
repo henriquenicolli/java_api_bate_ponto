@@ -1,0 +1,159 @@
+{
+  "main": {
+    "id": "4959bc83f9b98661",
+    "type": "split",
+    "children": [
+      {
+        "id": "9fc8d188e52adf3f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ef244a6eed9878fe",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ANEXO V - ARQUIVO FONTE DE DADOS - AFD.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "1e1d21852d7a8484",
+    "type": "split",
+    "children": [
+      {
+        "id": "2c6cb4dcc4645014",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a4659baad385e204",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "3142f07234d76821",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "4188900c914d0fc5",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 380.5
+  },
+  "right": {
+    "id": "1063197dd7540882",
+    "type": "split",
+    "children": [
+      {
+        "id": "43755ff8c726bdf0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "58febbce7ab52f95",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "ANEXO V - ARQUIVO FONTE DE DADOS - AFD.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6b8628c718827e98",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "ANEXO V - ARQUIVO FONTE DE DADOS - AFD.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "2e46bf0c3bb881b4",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "260af0c5f53acdef",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "ANEXO V - ARQUIVO FONTE DE DADOS - AFD.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false
+    }
+  },
+  "active": "ef244a6eed9878fe",
+  "lastOpenFiles": [
+    "ANEXO IX - REQUISITOS REP-P.md",
+    "ANEXO VI - ARQUIVO ELETRÔNICO DE JORNADA - AEJ.md",
+    "ANEXO VII - ATESTADO TÉCNICO E TERMO DE RESPONSABILIDADE.md",
+    "ANEXO V - ARQUIVO FONTE DE DADOS - AFD.md",
+    "SISTEMA DE REGISTRO DE PONTO ELETRONICO.md",
+    "REP-P - Art 78 - DEFINICAO.md",
+    "Servidor.md"
+  ]
+}

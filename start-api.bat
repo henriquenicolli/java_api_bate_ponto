@@ -9,7 +9,7 @@ cd..
 REM iniciar api
 echo iniciando api...
 
-cd bateponto-application\target\
-java -jar bateponto-application-0.0.1-SNAPSHOT.jar
+cd rep-application\target\
+java -jar rep-application-0.0.1-SNAPSHOT.jar
 
 pause
