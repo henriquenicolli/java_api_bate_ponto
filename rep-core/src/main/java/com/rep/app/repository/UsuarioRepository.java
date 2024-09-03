@@ -7,5 +7,5 @@ public interface UsuarioRepository {
 
     UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO);
 
-    User findByUsername(String username);
+    UsuarioDTO findByUsername(String username);
 }

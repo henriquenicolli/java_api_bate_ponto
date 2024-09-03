@@ -35,6 +35,9 @@ public class UsuarioEntity {
     @Column(name = "user_email")
     private String userEmail;
 
+    @Column(name = "id_empregado", updatable = false)
+    private String idEmpregado;
+
     @PrePersist
     public void generateId() {
         idUsuario = UUID.randomUUID().toString();

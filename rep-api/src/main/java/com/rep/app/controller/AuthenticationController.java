@@ -1,6 +1,7 @@
 package com.rep.app.controller;
 
 import com.rep.app.configuration.security.JwtUtil;
+import com.rep.app.model.dto.UsuarioDTO;
 import com.rep.app.request.AuthenticationRequest;
 import com.rep.app.response.AuthenticationResponse;
 import com.rep.app.service.CustomUserDetailsService;
@@ -36,10 +37,15 @@ public class AuthenticationController {
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final UsuarioDTO userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        return ResponseEntity.ok(
+                AuthenticationResponse.builder()
+                        .token(jwt)
+                        .empregado(userDetails.getIdEmpregado())
+                        .build()
+        );
     }
 
 }

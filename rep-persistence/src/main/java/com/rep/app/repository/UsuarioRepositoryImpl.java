@@ -44,11 +44,11 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 
     @Override
     @Transactional
-    public User findByUsername(final String username) {
+    public UsuarioDTO findByUsername(final String username) {
         UsuarioEntity usuarioEntity = entityManager.createNamedQuery(UsuarioEntity.QUERY_FIND_USUARIO_BY_USERNAME, UsuarioEntity.class)
                 .setParameter("username", username)
                 .getSingleResult();
 
-        return new User(usuarioEntity.getUserLogin(), usuarioEntity.getUserPassword(), new ArrayList<>());
+        return new UsuarioDTO(usuarioEntity.getUserLogin(), usuarioEntity.getUserPassword(), usuarioEntity.getIdEmpregado(), new ArrayList<>());
     }
 }

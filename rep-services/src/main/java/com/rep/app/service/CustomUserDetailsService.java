@@ -1,5 +1,6 @@
 package com.rep.app.service;
 
+import com.rep.app.model.dto.UsuarioDTO;
 import com.rep.app.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -17,12 +18,12 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = usuarioRepository.findByUsername(username);
+    public UsuarioDTO loadUserByUsername(String username) throws UsernameNotFoundException {
+        UsuarioDTO user = usuarioRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return new User(user.getUsername(), user.getPassword(), new ArrayList<>());
+        return user;
     }
 
 }

@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `TBL_USUARIO` (
   `user_login` VARCHAR(45) NOT NULL,
   `user_password` VARCHAR(255) NOT NULL,
   `user_email` VARCHAR(45) NULL,
+  `id_empregado` CHAR(36) NULL,
   PRIMARY KEY (`id_usuario`))
 ENGINE = InnoDB;
 
@@ -45,6 +46,8 @@ CREATE TABLE IF NOT EXISTS `TBL_EMPRESA` (
   `id_telefone` VARCHAR(36) NOT NULL,
   `id_usuario_inclusao_alteracao` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_empresa`),
+  INDEX `fk_TBL_EMPRESA_TBL_EMPR_TELF1_idx` (`id_telefone` ASC) VISIBLE,
+  INDEX `fk_TBL_EMPRESA_TBL_USUARIO1_idx` (`id_usuario_inclusao_alteracao` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_EMPRESA_TBL_EMPR_TELF1`
     FOREIGN KEY (`id_telefone`)
     REFERENCES `TBL_TELEFONE` (`id_telefone`)
@@ -72,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `TBL_EMPR_ENDC` (
   `excluido` TINYINT NOT NULL,
   `id_empresa` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_endereco`),
+  INDEX `fk_TBL_EMPR_ENDC_TBL_EMPRESA1_idx` (`id_empresa` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_EMPR_ENDC_TBL_EMPRESA1`
     FOREIGN KEY (`id_empresa`)
     REFERENCES `TBL_EMPRESA` (`id_empresa`)
@@ -119,6 +123,10 @@ CREATE TABLE IF NOT EXISTS `TBL_EMPREGADO` (
   `id_telefone` VARCHAR(36) NOT NULL,
   `id_empresa` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_empregado`),
+  INDEX `fk_TBL_FUNCIONARIO_TBL_EMPRESA_idx` (`id_empresa` ASC) VISIBLE,
+  INDEX `fk_TBL_EMPREGADO_TBL_EMPR_ENDC1_idx` (`id_empresa_endereco` ASC) VISIBLE,
+  INDEX `fk_TBL_EMPREGADO_TBL_HORARIO_CONTRATUAL1_idx` (`cod_horario_contratual` ASC) VISIBLE,
+  INDEX `fk_TBL_EMPREGADO_TBL_TELEFONE1_idx` (`id_telefone` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_FUNCIONARIO_TBL_EMPRESA`
     FOREIGN KEY (`id_empresa`)
     REFERENCES `TBL_EMPRESA` (`id_empresa`)
@@ -200,6 +208,10 @@ CREATE TABLE IF NOT EXISTS `TBL_REGISTRO_PONTO` (
   `excluido` TINYINT NOT NULL,
   `registro_excluido_aprovacao` TINYINT NOT NULL,
   PRIMARY KEY (`id_registro_ponto`),
+  INDEX `fk_TBL_REGISTRO_PONTO_TBL_FUNCIONARIO1_idx` (`id_empregado` ASC) VISIBLE,
+  INDEX `fk_TBL_REGISTRO_PONTO_TBL_TIPO_REGISTRO_PONTO1_idx` (`cod_tipo_marcao` ASC) VISIBLE,
+  INDEX `fk_TBL_REGISTRO_PONTO_tbl_coletor_registro1_idx` (`cod_idef_coletor` ASC) VISIBLE,
+  INDEX `fk_TBL_REGISTRO_PONTO_TBL_FONTE_MARCACAO1_idx` (`cod_fonte_marcacao` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_REGISTRO_PONTO_TBL_FUNCIONARIO1`
     FOREIGN KEY (`id_empregado`)
     REFERENCES `TBL_EMPREGADO` (`id_empregado`)
@@ -233,6 +245,7 @@ CREATE TABLE IF NOT EXISTS `TBL_REGISTRO_FERIAS` (
   `qtde_dias` INT NULL,
   `id_empregado` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_registro_ferias`),
+  INDEX `fk_TBL_REGISTRO_FERIAS_TBL_FUNCIONARIO1_idx` (`id_empregado` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_REGISTRO_FERIAS_TBL_FUNCIONARIO1`
     FOREIGN KEY (`id_empregado`)
     REFERENCES `TBL_EMPREGADO` (`id_empregado`)
@@ -264,6 +277,8 @@ CREATE TABLE IF NOT EXISTS `TBL_EMPREGADO_REMUNERACAO` (
   `cod_tipo_remuneracao` INT NOT NULL,
   `id_empregado` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_emprg_remu`),
+  INDEX `fk_TBL_FUNC_REMUNERACAO_TBL_FUNCIONARIO1_idx` (`id_empregado` ASC) VISIBLE,
+  INDEX `fk_TBL_FUNC_REMUNERACAO_TBL_TIPO_REMUNERACAO1_idx` (`cod_tipo_remuneracao` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_FUNC_REMUNERACAO_TBL_FUNCIONARIO1`
     FOREIGN KEY (`id_empregado`)
     REFERENCES `TBL_EMPREGADO` (`id_empregado`)
@@ -296,7 +311,9 @@ CREATE TABLE IF NOT EXISTS `TBL_EMPREGADO_LICENCA` (
   `data_fim` DATE NOT NULL,
   `id_empregado` VARCHAR(36) NOT NULL,
   `cod_tipo_licenca` INT NOT NULL,
+  INDEX `fk_TBL_FUNC_LICENSA_TBL_FUNCIONARIO1_idx` (`id_empregado` ASC) VISIBLE,
   PRIMARY KEY (`id_emprg_licenca`),
+  INDEX `fk_TBL_FUNC_LICENSA_TBL_TIPO_LICENCA1_idx` (`cod_tipo_licenca` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_FUNC_LICENSA_TBL_FUNCIONARIO1`
     FOREIGN KEY (`id_empregado`)
     REFERENCES `TBL_EMPREGADO` (`id_empregado`)
@@ -322,6 +339,8 @@ CREATE TABLE IF NOT EXISTS `TBL_HISTORICO_EMPREGADO` (
   `id_empregado` VARCHAR(36) NOT NULL,
   `id_usuario_inclusao_alteracao` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_historico_empregado`),
+  INDEX `fk_TBL_HISTORICO_EMPREGADO_TBL_EMPREGADO1_idx` (`id_empregado` ASC) VISIBLE,
+  INDEX `fk_TBL_HISTORICO_EMPREGADO_TBL_USUARIO1_idx` (`id_usuario_inclusao_alteracao` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_HISTORICO_EMPREGADO_TBL_EMPREGADO1`
     FOREIGN KEY (`id_empregado`)
     REFERENCES `TBL_EMPREGADO` (`id_empregado`)
@@ -361,6 +380,7 @@ CREATE TABLE IF NOT EXISTS `TBL_REP_EVENTOS` (
   `tipo_registro` VARCHAR(2) NOT NULL COMMENT 'Tipo de evento:\n\"02\": retorno de energia (REP-C ou REP-P); \n\n\"07\": disponibilidade de serviço (somente para REP-P); \n\n\"08\": indisponibilidade de serviço (somente para REP-P).',
   `id_info_ptrp` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`num_seq_registros`, `id_rep_evento`),
+  INDEX `fk_TBL_REP_EVENTOS_TBL_INFO_PTRP1_idx` (`id_info_ptrp` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_REP_EVENTOS_TBL_INFO_PTRP1`
     FOREIGN KEY (`id_info_ptrp`)
     REFERENCES `TBL_INFO_PTRP` (`id_info_ptrp`)
@@ -380,9 +400,21 @@ CREATE TABLE IF NOT EXISTS `TBL_BANCO_HORAS` (
   `tipo_movimento_banco_horas` INT NULL COMMENT 'Tipo de movimento no banco de horas: \n\n- \"1\": inclusão de horas no banco de horas; \n\n- \"2\": compensação de horas do banco de horas.\n Campo obrigatório se tipoAusenOuComp for igual a \"3\".',
   `id_empregado` VARCHAR(36) NOT NULL,
   PRIMARY KEY (`id_banco_horas`),
+  INDEX `fk_TBL_BANCO_HORAS_TBL_EMPREGADO1_idx` (`id_empregado` ASC) VISIBLE,
   CONSTRAINT `fk_TBL_BANCO_HORAS_TBL_EMPREGADO1`
     FOREIGN KEY (`id_empregado`)
     REFERENCES `TBL_EMPREGADO` (`id_empregado`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- TBL_USUARIO Constraint
+-- -----------------------------------------------------
+ALTER TABLE `TBL_USUARIO`
+ADD CONSTRAINT `fk_TBL_USUARIO_TBL_EMPREGADO1`
+FOREIGN KEY (`id_empregado`)
+REFERENCES `TBL_EMPREGADO` (`id_empregado`)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
