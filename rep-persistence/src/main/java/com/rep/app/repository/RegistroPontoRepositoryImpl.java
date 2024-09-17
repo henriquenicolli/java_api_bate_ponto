@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import static com.rep.app.entity.RegistroPontoEntity.*;
@@ -88,6 +89,7 @@ public class RegistroPontoRepositoryImpl implements RegistroPontoRepository {
 
         RegistroPontoEntity registroPontoEntity = RegistroPontoEntityMapper.INSTANCE.toEntity(registroPontoDTO);
         registroPontoEntity.setDataHoraInclusaoRegistro(LocalDateTime.now());
+        registroPontoEntity.setHoraMarcacaoPonto(LocalTime.now());
         registroPontoEntity.setFusoHorarioRegistro("America/Sao_Paulo");
         registroPontoEntity.setHashRegistro("hash".getBytes());
         registroPontoEntity.setNumSeqRegistro(getNumeroSequencial(QUERY_FIND_MAX_NUMERO_SEQUENCIAL) + 1);
